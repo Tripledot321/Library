@@ -14,7 +14,7 @@ public class GUI {
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
 
-    public void createGUI(Main.ChoiceHandler Main.cHandler) {
+    public void createGUI(Main.ChoiceHandler cHandler) {
 
         // Window
         frame = new JFrame();
