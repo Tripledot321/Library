@@ -10,6 +10,7 @@ public class GUI {
     JPanel titleNamePanel;
     JLabel label;
     Container container;
+    Font normalfont = new Font("Times New Roman", Font.plain, 26);
 
     public GUI() {
 
@@ -25,7 +26,7 @@ public class GUI {
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 1000, 150);
         titleNamePanel.setBackground(Color.black);
-        
+
         container.add(titleNamePanel);
 
     }
