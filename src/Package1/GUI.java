@@ -3,7 +3,7 @@ package Package1;
 import javax.swing.*;
 import java.awt.*;
 
-
+//min kommentar
 public class GUI {
 
     JFrame frame;
