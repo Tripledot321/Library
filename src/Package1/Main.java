@@ -10,26 +10,28 @@ public class Main {
         GUI gui = new GUI();
         VisibilityManager vm = new VisibilityManager(gui);
 
-        public static void main(String[]args){
+        public static void main(String[]args) {
 
-          new Main(); //Starts menu window
-
+            new Main(); //Starts menu window
         }
+
+
 
         public  Main() {
 
             gui.createGUI(cHandler);
             vm.showTitleScreen();
+
         }
 
-        public class ChoiceHandler implements ActionListener {
+        public static class ChoiceHandler implements ActionListener {
 
            public void actionPerformed(ActionEvent event) {
 
                String yourChoice = event.getActionCommand();
 
                switch(yourChoice) {
-                   case "start": break;
+                   case "ENTER": break;
                    case "c1": break;
                    case "c2": break;
                    case "c3": break;

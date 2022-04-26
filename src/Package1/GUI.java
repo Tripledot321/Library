@@ -48,7 +48,7 @@ public class GUI {
         // Package1.Main Menu
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.black);
+        mainTextPanel.setBackground(Color.white);
 
         mainTextArea = new JTextArea("This is the main text Area");
         mainTextArea.setBounds(250, 350, 300, 150);
@@ -62,7 +62,6 @@ public class GUI {
 
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 600, 475, 150);
-
 
         choice1 = new JButton("choice1");
         choice1.setBackground(Color.black);
