@@ -60,6 +60,10 @@ public class GUI {
         mainTextArea.setEditable(false);
         mainTextPanel.add(mainTextArea);
 
+        choiceButtonPanel = new JPanel();
+        choiceButtonPanel.setBounds(250, 600, 475, 150);
+
+
         choice1 = new JButton("choice1");
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
