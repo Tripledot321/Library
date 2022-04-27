@@ -14,9 +14,9 @@ public class GUI {
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
 
-    public void createGUI(Main.ChoiceHandler cHandler) {
+    public void createGUI(LibrarySys.ChoiceHandler cHandler) {
 
-        // Window
+        // Window frame
         frame = new JFrame();
         frame.setSize(1200, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,7 +24,7 @@ public class GUI {
         frame.setTitle("Library");
         frame.setLayout(null);
 
-        // Title Screen
+        // Title screen
         titleNamePanel = new JPanel();
         titleNamePanel.setBounds(100, 100, 1000, 150);
         titleNamePanel.setBackground(Color.black);
@@ -33,22 +33,25 @@ public class GUI {
         titleNameLabel.setFont(bigFont);
         titleNamePanel.add(titleNameLabel);
 
+        //button
         startButtonPanel = new JPanel();
         startButtonPanel.setBounds(500, 400, 200, 100);
         startButtonPanel.setBackground(Color.black);
-        startButton = new JButton("ENTER");
+        startButton = new JButton("START");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
         startButton.setFocusPainted(false);
         startButton.addActionListener(cHandler);
-        startButton.setActionCommand("ENTER");
+        //ändrade denna från "ENTER" till "start" enligt videon, jag tror att ChoiceHandlern kallar på namnet i switchen så måste nog va samma?
+        //jag fick ett nytt sorts felmeddelande och knappen ser lite funky ut nu när man klickar så verkar hända mer
+        startButton.setActionCommand("start");
         startButtonPanel.add(startButton);
 
         // Package1.Main Menu
         mainTextPanel = new JPanel();
         mainTextPanel.setBounds(100, 100, 600, 250);
-        mainTextPanel.setBackground(Color.black);
+        mainTextPanel.setBackground(Color.white);
 
         mainTextArea = new JTextArea("This is the main text Area");
         mainTextArea.setBounds(250, 350, 300, 150);
@@ -63,7 +66,6 @@ public class GUI {
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 600, 475, 150);
 
-
         choice1 = new JButton("choice1");
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
@@ -72,6 +74,7 @@ public class GUI {
         choice1.addActionListener(cHandler);
         choice1.setActionCommand("c1");
         choiceButtonPanel.add(choice1);
+
         choice2 = new JButton("choice2");
         choice2.setBackground(Color.black);
         choice2.setForeground(Color.white);
@@ -80,6 +83,7 @@ public class GUI {
         choice2.addActionListener(cHandler);
         choice2.setActionCommand("c2");
         choiceButtonPanel.add(choice2);
+
         choice3 = new JButton("choice3");
         choice3.setBackground(Color.black);
         choice3.setForeground(Color.white);
@@ -88,6 +92,7 @@ public class GUI {
         choice3.addActionListener(cHandler);
         choice3.setActionCommand("c3");
         choiceButtonPanel.add(choice3);
+
         choice4 = new JButton("choice4");
         choice4.setBackground(Color.black);
         choice4.setForeground(Color.white);
@@ -97,7 +102,6 @@ public class GUI {
         choice4.setActionCommand("c4");
         choiceButtonPanel.add(choice4);
 
-
         frame.add(titleNamePanel);
         frame.add(startButtonPanel);
         frame.add(mainTextPanel);
@@ -105,5 +109,6 @@ public class GUI {
         frame.setVisible(true);
 
     }
+
 
 }
