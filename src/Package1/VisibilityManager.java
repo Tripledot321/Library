@@ -19,6 +19,7 @@ public class VisibilityManager {
         // Show start screen
         gui.titleNamePanel.setVisible(true);
         gui.startButtonPanel.setVisible(true);
+        gui.searchFieldPanel.setVisible(true);
 
         // Hide the game screen
         gui.mainTextPanel.setVisible(false);
@@ -32,6 +33,8 @@ public class VisibilityManager {
 
         gui.titleNamePanel.setVisible(false);
         gui.startButtonPanel.setVisible(false);
+        gui.searchFieldPanel.setVisible(false);
+
 
         gui.mainTextPanel.setVisible(true);
         gui.choiceButtonPanel.setVisible(true);

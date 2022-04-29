@@ -7,9 +7,10 @@ import java.awt.*;
 public class GUI {
 
     JFrame frame;
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel;
+    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, searchFieldPanel;
     JLabel titleNameLabel;
     JButton startButton, choice1, choice2, choice3, choice4;
+    JTextField searchField;
     JTextArea mainTextArea;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
@@ -26,18 +27,18 @@ public class GUI {
 
         // Title screen
         titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(100, 100, 1000, 150);
+        titleNamePanel.setBounds(0, 0, 1200, 120);
         titleNamePanel.setBackground(Color.black);
         titleNameLabel = new JLabel("LTU Library");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(bigFont);
         titleNamePanel.add(titleNameLabel);
 
-        //button
+        //Search button
         startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(500, 400, 200, 100);
-        startButtonPanel.setBackground(Color.black);
-        startButton = new JButton("START");
+        startButtonPanel.setBounds(500, 350, 200, 100);
+        startButtonPanel.setBackground(Color.white);
+        startButton = new JButton("Search");
         startButton.setBackground(Color.black);
         startButton.setForeground(Color.white);
         startButton.setFont(normalFont);
@@ -47,6 +48,16 @@ public class GUI {
         //jag fick ett nytt sorts felmeddelande och knappen ser lite funky ut nu när man klickar så verkar hända mer
         startButton.setActionCommand("start");
         startButtonPanel.add(startButton);
+
+
+        //search field
+        searchFieldPanel = new JPanel();
+        searchFieldPanel.setBounds(300, 300, 600, 30);
+        searchFieldPanel.setBackground(Color.white);
+        searchField = new JTextField();
+        searchField.setPreferredSize(new Dimension(550,30));
+        searchField.setBackground(Color.lightGray);
+        searchFieldPanel.add(searchField);
 
         // Package1.Main Menu
         mainTextPanel = new JPanel();
@@ -105,6 +116,7 @@ public class GUI {
         frame.add(titleNamePanel);
         frame.add(startButtonPanel);
         frame.add(mainTextPanel);
+        frame.add(searchFieldPanel);
 
         frame.setVisible(true);
 
