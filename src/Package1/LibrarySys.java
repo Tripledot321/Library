@@ -32,7 +32,7 @@ public class LibrarySys {
 
                switch(yourChoice) {
                    case "start": vm.searchResults(); break;
-                   case "c1": break;
+                   case "login": vm.loginScreen(); break;
                    case "c2": break;
                    case "c3": break;
                    case "c4": break;

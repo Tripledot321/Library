@@ -31,13 +31,38 @@ public class VisibilityManager {
 
     public void searchResults(){
 
-        gui.titleNamePanel.setVisible(false);
+        gui.titleNamePanel.setVisible(true);
         gui.startButtonPanel.setVisible(false);
         gui.searchFieldPanel.setVisible(false);
 
+        gui.mainTextPanel.setVisible(true);
+        gui.choiceButtonPanel.setVisible(true);
+
+    }
+
+    public void displaySearchResults(){
+
+        gui.titleNamePanel.setVisible(true);
+        gui.startButtonPanel.setVisible(false);
+        gui.searchFieldPanel.setVisible(false);
 
         gui.mainTextPanel.setVisible(true);
         gui.choiceButtonPanel.setVisible(true);
+
+    }
+
+    public void loginScreen(){
+
+        gui.titleNamePanel.setVisible(true);
+        //insåg nedan att det inte bara är panelerna vi kan styra utan även individuella knappar t.ex.
+        gui.loginButton.setVisible(false);
+        gui.startButtonPanel.setVisible(false);
+        gui.searchFieldPanel.setVisible(false);
+
+        gui.mainTextPanel.setVisible(true);
+        gui.loginScreenLabel.setVisible(true);
+        gui.choiceButtonPanel.setVisible(true);
+
 
     }
 

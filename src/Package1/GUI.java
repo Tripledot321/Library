@@ -8,8 +8,8 @@ public class GUI {
 
     JFrame frame;
     JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, searchFieldPanel;
-    JLabel titleNameLabel;
-    JButton startButton, choice1, choice2, choice3, choice4;
+    JLabel titleNameLabel, loginScreenLabel;
+    JButton startButton, choice1, choice2, choice3, choice4, loginButton;
     JTextField searchField;
     JTextArea mainTextArea;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
@@ -33,6 +33,19 @@ public class GUI {
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(bigFont);
         titleNamePanel.add(titleNameLabel);
+        loginButton = new JButton("Login");
+        //Det är nåt som inte blir bra när man försöker flytta saker, oavsett vilket x-värde så samma plats.. :'(
+        loginButton.setBounds(1200, 30,300, 50);
+        //loginButton.setLocation(1100,30);
+        loginButton.setFont(normalFont);
+        loginButton.setBackground(Color.WHITE);
+        loginButton.setFocusPainted(false);
+        loginButton.addActionListener(cHandler);
+        loginButton.setActionCommand("login");
+        titleNamePanel.add(loginButton);
+
+
+
 
         //Search button
         startButtonPanel = new JPanel();
@@ -61,22 +74,37 @@ public class GUI {
 
         // Package1.Main Menu
         mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(100, 100, 600, 250);
+        mainTextPanel.setBounds(100, 130, 900, 600);
         mainTextPanel.setBackground(Color.white);
 
         mainTextArea = new JTextArea("This is the main text Area");
-        mainTextArea.setBounds(250, 350, 300, 150);
-        mainTextArea.setBackground(Color.black);
-        mainTextArea.setForeground(Color.white);
+        mainTextArea.setBounds(400, 350, 1000, 300);
+        mainTextArea.setBackground(Color.LIGHT_GRAY);
+        mainTextArea.setForeground(Color.black);
+        mainTextArea.setPreferredSize(new Dimension(900,300));
         mainTextArea.setFont(normalFont);
         mainTextArea.setLineWrap(true);
         mainTextArea.setWrapStyleWord(true);
         mainTextArea.setEditable(false);
+        mainTextArea.setVisible(false);
         mainTextPanel.add(mainTextArea);
+
+        //Testar att lägga in en text som kan synas/inte synas beroende på VisibilityManager
+        loginScreenLabel = new JLabel("Please enter your username and password");
+        loginScreenLabel.setForeground(Color.black);
+        loginScreenLabel.setFont(normalFont);
+        //Tror det är såhär man kanske ska göra, alltså att sakerna är setVisible(false) som default och
+        //sen när man vill att dom ska synas ändrar man i metoden i VisibilityManager
+        loginScreenLabel.setVisible(false);
+        mainTextPanel.add(loginScreenLabel);
+
+
 
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 600, 475, 150);
 
+
+        //Tror dessa är överflödiga, det är knappar som vi inte lagt någonstans, men såg att dom var med i videon
         choice1 = new JButton("choice1");
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
