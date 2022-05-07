@@ -6,8 +6,6 @@ public class VisibilityManager {
 
     public VisibilityManager(GUI userInterface) {
         gui = userInterface;
-        gui.headerPanel.setVisible(true);
-        gui.mainPanel.setVisible(true);
     }
 
     public void searchResults(){

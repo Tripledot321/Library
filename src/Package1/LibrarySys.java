@@ -1,13 +1,11 @@
 package Package1;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LibrarySys {
 
-    ChoiceHandler cHandler;
+    NavigationChoiceHandler cHandler;
     GUI gui;
     VisibilityManager vm;
 
@@ -18,33 +16,16 @@ public class LibrarySys {
     }
 
     public LibrarySys() {
-        cHandler = new ChoiceHandler();
+        cHandler = new NavigationChoiceHandler();
 
-        gui = new GUI();
+        var searchService = new SearchService();
+        var searchHandler = new SearchHandler(searchService);
+        gui = new GUI(searchHandler);
         gui.createGUI(cHandler);
 
         vm = new VisibilityManager(gui);
+        cHandler.setVisibilityManager(vm);
+
         vm.searchResults();
-    }
-
-    public class ChoiceHandler implements ActionListener {
-
-           public void actionPerformed(ActionEvent event) {
-
-               String yourChoice = event.getActionCommand();
-
-               switch(yourChoice) {
-                   case "start":
-                   case "search": vm.searchResults(); break;
-                   case "login": vm.loginScreen(); break;
-                   case "c2": break;
-                   case "c3": break;
-                   case "c4": break;
-
-               }
-
-
-           }
-
     }
 }
