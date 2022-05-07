@@ -12,10 +12,10 @@ public class GUI {
     JPanel searchBooksPanel, loginPanel;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
-    private SearchHandler _searchHandler;
+    private SearchService _searchService;
 
-    public GUI(SearchHandler searchHandler) {
-        this._searchHandler = searchHandler;
+    public GUI(SearchService searchService) {
+        this._searchService = searchService;
     }
 
     public void createGUI(NavigationChoiceHandler cHandler) {
@@ -118,8 +118,7 @@ public class GUI {
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
-                    var newEvent = new ActionEvent(this, event.getID(), searchField.getText());
-                    _searchHandler.actionPerformed(newEvent);
+                    _searchService.findBooks(searchField.getText());
                 }
             });
             searchBooksPanel.add(searchButton);
@@ -162,9 +161,9 @@ public class GUI {
         loginButton.setFont(normalFont);
         loginButton.setBackground(Color.WHITE);
         loginButton.setFocusPainted(false);
-        loginButton.addActionListener(cHandler);
-        loginButton.setActionCommand("login");
+
         loginPanel.add(loginButton);
+
 
 
         //Testar att lägga in en text som kan synas/inte synas beroende på VisibilityManager
