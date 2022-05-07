@@ -12,11 +12,11 @@ public class GUI {
     JPanel searchBooksPanel, loginPanel;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
-    private SearchService _searchService;
+    private BookService _bookService;
     private UserService _userService;
 
-    public GUI(SearchService searchService, UserService userService) {
-        this._searchService = searchService;
+    public GUI(BookService bookService, UserService userService) {
+        this._bookService = bookService;
         this._userService = userService;
     }
 
@@ -120,7 +120,7 @@ public class GUI {
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
-                    _searchService.findBooks(searchField.getText());
+                    _bookService.findBooks(searchField.getText());
                 }
             });
             searchBooksPanel.add(searchButton);

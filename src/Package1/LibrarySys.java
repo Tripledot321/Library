@@ -1,8 +1,5 @@
 package Package1;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class LibrarySys {
 
     NavigationChoiceHandler cHandler;
@@ -18,7 +15,7 @@ public class LibrarySys {
     public LibrarySys() {
         cHandler = new NavigationChoiceHandler();
 
-        var searchService = new SearchService();
+        var searchService = new BookService();
         var userService = new UserService();
         gui = new GUI(searchService, userService);
         gui.createGUI(cHandler);

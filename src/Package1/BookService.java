@@ -1,8 +1,8 @@
 package Package1;
 
-public class SearchService {
+public class BookService {
 
-    public SearchService(){
+    public BookService(){
 
     }
 
