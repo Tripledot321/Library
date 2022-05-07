@@ -7,11 +7,7 @@ import java.awt.*;
 public class GUI {
 
     JFrame frame;
-    JPanel titleNamePanel, startButtonPanel, mainTextPanel, choiceButtonPanel, searchFieldPanel;
-    JLabel titleNameLabel, loginScreenLabel;
-    JButton startButton, choice1, choice2, choice3, choice4, loginButton;
-    JTextField searchField;
-    JTextArea mainTextArea;
+    JPanel headerPanel, searchBooksPanel, mainPanel, loginPanel;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
 
@@ -23,17 +19,42 @@ public class GUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.white);
         frame.setTitle("Library");
-        frame.setLayout(null);
+//        frame.setLayout(null);
 
-        // Title screen
-        titleNamePanel = new JPanel();
-        titleNamePanel.setBounds(0, 0, 1200, 120);
-        titleNamePanel.setBackground(Color.black);
-        titleNameLabel = new JLabel("LTU Library");
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+//        panel.setBackground(Color.RED);
+//
+//        Button button = new Button("Button");
+//        panel.add(button);
+//        panel.setVisible(true);
+//
+//        frame.add(panel, BorderLayout.NORTH);
+//        frame.setVisible(true);
+
+        // headerPanel
+        headerPanel = new JPanel();
+        headerPanel.setBounds(0, 0, 1200, 120);
+        headerPanel.setBackground(Color.black);
+        headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        frame.add(headerPanel);
+
+
+        // Package1.Main Menu
+        mainPanel = new JPanel();
+        mainPanel.setBounds(100, 130, 900, 600);
+        mainPanel.setBackground(Color.white);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        frame.add(mainPanel);
+
+
+        //lägg till saker i headerPanel
+        JLabel titleNameLabel = new JLabel("LTU Library");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(bigFont);
-        titleNamePanel.add(titleNameLabel);
-        loginButton = new JButton("Login");
+        headerPanel.add(titleNameLabel);
+
+        JButton loginButton = new JButton("Login");
         //Det är nåt som inte blir bra när man försöker flytta saker, oavsett vilket x-värde så samma plats.. :'(
         loginButton.setBounds(1200, 30,300, 50);
         //loginButton.setLocation(1100,30);
@@ -42,70 +63,100 @@ public class GUI {
         loginButton.setFocusPainted(false);
         loginButton.addActionListener(cHandler);
         loginButton.setActionCommand("login");
-        titleNamePanel.add(loginButton);
+        headerPanel.add(loginButton);
 
-
+        //
+        JButton goToSearchButton = new JButton("Search");
+        //Det är nåt som inte blir bra när man försöker flytta saker, oavsett vilket x-värde så samma plats.. :'(
+        goToSearchButton.setBounds(1200, 100,300, 50);
+        goToSearchButton.setFont(normalFont);
+        goToSearchButton.setBackground(Color.WHITE);
+        goToSearchButton.setFocusPainted(false);
+        goToSearchButton.addActionListener(cHandler);
+        goToSearchButton.setActionCommand("search");
+        headerPanel.add(goToSearchButton);
 
 
         //Search button
-        startButtonPanel = new JPanel();
-        startButtonPanel.setBounds(500, 350, 200, 100);
-        startButtonPanel.setBackground(Color.white);
-        startButton = new JButton("Search");
-        startButton.setBackground(Color.black);
-        startButton.setForeground(Color.white);
-        startButton.setFont(normalFont);
-        startButton.setFocusPainted(false);
-        startButton.addActionListener(cHandler);
+        searchBooksPanel = new JPanel();
+        searchBooksPanel.setBounds(500, 350, 200, 100);
+        searchBooksPanel.setBackground(Color.white);
+        mainPanel.add(searchBooksPanel);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.setBackground(Color.black);
+        searchButton.setForeground(Color.white);
+        searchButton.setFont(normalFont);
+        searchButton.setFocusPainted(false);
+        searchButton.addActionListener(cHandler);
         //ändrade denna från "ENTER" till "start" enligt videon, jag tror att ChoiceHandlern kallar på namnet i switchen så måste nog va samma?
         //jag fick ett nytt sorts felmeddelande och knappen ser lite funky ut nu när man klickar så verkar hända mer
-        startButton.setActionCommand("start");
-        startButtonPanel.add(startButton);
+        searchButton.setActionCommand("start");
+        searchBooksPanel.add(searchButton);
 
+
+
+        //search fields with labels
 
         //search field
-        searchFieldPanel = new JPanel();
-        searchFieldPanel.setBounds(300, 300, 600, 30);
-        searchFieldPanel.setBackground(Color.white);
-        searchField = new JTextField();
+        JTextField searchField = new JTextField();
         searchField.setPreferredSize(new Dimension(550,30));
         searchField.setBackground(Color.lightGray);
-        searchFieldPanel.add(searchField);
+        searchBooksPanel.add(searchField);
 
-        // Package1.Main Menu
-        mainTextPanel = new JPanel();
-        mainTextPanel.setBounds(100, 130, 900, 600);
-        mainTextPanel.setBackground(Color.white);
 
-        mainTextArea = new JTextArea("This is the main text Area");
-        mainTextArea.setBounds(400, 350, 1000, 300);
-        mainTextArea.setBackground(Color.LIGHT_GRAY);
-        mainTextArea.setForeground(Color.black);
-        mainTextArea.setPreferredSize(new Dimension(900,300));
-        mainTextArea.setFont(normalFont);
-        mainTextArea.setLineWrap(true);
-        mainTextArea.setWrapStyleWord(true);
-        mainTextArea.setEditable(false);
-        mainTextArea.setVisible(false);
-        mainTextPanel.add(mainTextArea);
+        //Login screen username
+
+        //username text field
+        loginPanel = new JPanel();
+        mainPanel.add(loginPanel);
+
+        //usernamePanel.setBounds(300, 300, 200, 30);
+        //usernamePanel.setBackground(Color.white);
+        JTextField usernameField = new JTextField();
+        //usernameField.setPreferredSize(new Dimension(200,30));
+        usernameField.setBackground(Color.lightGray);
+        loginPanel.add(usernameField);
+
+        //username label
+        JLabel usernameLabel = new JLabel("Username: ");
+        usernameLabel.setForeground(Color.white);
+        usernameLabel.setFont(normalFont);
+        loginPanel.add(usernameLabel);
+
+        //password field
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setPreferredSize(new Dimension(200,30));
+        passwordField.setBackground(Color.lightGray);
+        loginPanel.add(passwordField);
+        //password label
+        JLabel passwordLabel = new JLabel("Password: ");
+        passwordLabel.setForeground(Color.black);
+        passwordLabel.setFont(normalFont);
+        loginPanel.add(passwordLabel);
 
         //Testar att lägga in en text som kan synas/inte synas beroende på VisibilityManager
-        loginScreenLabel = new JLabel("Please enter your username and password");
+        JLabel loginScreenLabel = new JLabel("Please enter your username and password");
         loginScreenLabel.setForeground(Color.black);
         loginScreenLabel.setFont(normalFont);
         //Tror det är såhär man kanske ska göra, alltså att sakerna är setVisible(false) som default och
         //sen när man vill att dom ska synas ändrar man i metoden i VisibilityManager
         loginScreenLabel.setVisible(false);
-        mainTextPanel.add(loginScreenLabel);
+        loginPanel.add(loginScreenLabel);
 
 
 
-        choiceButtonPanel = new JPanel();
+
+
+
+
+
+        JPanel choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 600, 475, 150);
 
 
         //Tror dessa är överflödiga, det är knappar som vi inte lagt någonstans, men såg att dom var med i videon
-        choice1 = new JButton("choice1");
+      /*  choice1 = new JButton("choice1");
         choice1.setBackground(Color.black);
         choice1.setForeground(Color.white);
         choice1.setFont(normalFont);
@@ -139,12 +190,12 @@ public class GUI {
         choice4.setFocusPainted(false);
         choice4.addActionListener(cHandler);
         choice4.setActionCommand("c4");
-        choiceButtonPanel.add(choice4);
+        choiceButtonPanel.add(choice4);*/
 
-        frame.add(titleNamePanel);
-        frame.add(startButtonPanel);
-        frame.add(mainTextPanel);
-        frame.add(searchFieldPanel);
+        frame.add(headerPanel);
+        frame.add(searchBooksPanel);
+        frame.add(mainPanel);
+        frame.add(loginPanel);
 
         frame.setVisible(true);
 

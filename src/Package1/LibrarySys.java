@@ -7,21 +7,23 @@ import java.awt.event.ActionListener;
 
 public class LibrarySys {
 
-    ChoiceHandler cHandler = new ChoiceHandler();
-    GUI gui = new GUI();
-    VisibilityManager vm = new VisibilityManager(gui);
+    ChoiceHandler cHandler;
+    GUI gui;
+    VisibilityManager vm;
 
     public static void main(String[] args){
 
-        new LibrarySys();
+        var librarySystem = new LibrarySys();
 
     }
 
     public LibrarySys() {
+        cHandler = new ChoiceHandler();
 
+        gui = new GUI();
         gui.createGUI(cHandler);
-        vm.showTitleScreen();
 
+        vm = new VisibilityManager(gui);
     }
 
     public class ChoiceHandler implements ActionListener {
@@ -31,7 +33,8 @@ public class LibrarySys {
                String yourChoice = event.getActionCommand();
 
                switch(yourChoice) {
-                   case "start": vm.searchResults(); break;
+                   case "start":
+                   case "search": vm.searchResults(); break;
                    case "login": vm.loginScreen(); break;
                    case "c2": break;
                    case "c3": break;
