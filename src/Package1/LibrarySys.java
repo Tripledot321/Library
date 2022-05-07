@@ -19,8 +19,8 @@ public class LibrarySys {
         cHandler = new NavigationChoiceHandler();
 
         var searchService = new SearchService();
-//        var searchHandler = new SearchHandler(searchService);
-        gui = new GUI(searchService);
+        var userService = new UserService();
+        gui = new GUI(searchService, userService);
         gui.createGUI(cHandler);
 
         vm = new VisibilityManager(gui);

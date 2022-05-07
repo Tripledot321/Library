@@ -13,9 +13,11 @@ public class GUI {
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
     private SearchService _searchService;
+    private UserService _userService;
 
-    public GUI(SearchService searchService) {
+    public GUI(SearchService searchService, UserService userService) {
         this._searchService = searchService;
+        this._userService = userService;
     }
 
     public void createGUI(NavigationChoiceHandler cHandler) {
@@ -161,7 +163,12 @@ public class GUI {
         loginButton.setFont(normalFont);
         loginButton.setBackground(Color.WHITE);
         loginButton.setFocusPainted(false);
+        loginButton.addActionListener(new ActionListener(){
 
+            public void actionPerformed(ActionEvent event){
+                _userService.signInUser(usernameField.getText(), new String(passwordField.getPassword()));
+            }
+        });
         loginPanel.add(loginButton);
 
 
