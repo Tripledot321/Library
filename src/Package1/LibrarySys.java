@@ -24,6 +24,7 @@ public class LibrarySys {
         gui.createGUI(cHandler);
 
         vm = new VisibilityManager(gui);
+        vm.searchResults();
     }
 
     public class ChoiceHandler implements ActionListener {

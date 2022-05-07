@@ -15,72 +15,49 @@ public class GUI {
 
         // Window frame
         frame = new JFrame();
-        frame.setSize(1200, 800);
+
+        //Set up the content pane.
+        var pane = frame.getContentPane();
+        pane.setPreferredSize(new Dimension(1200,600));
+
+        //Display the window.
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(Color.white);
         frame.setLayout(new BorderLayout());
         frame.setTitle("Library");
         frame.setVisible(true);
 
-
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-//        panel.setBackground(Color.RED);
-//
-//        Button button = new Button("Button");
-//        panel.add(button);
-//        panel.setVisible(true);
-//
-//        frame.add(panel, BorderLayout.NORTH);
-
-
         // headerPanel
         headerPanel = new JPanel();
-//        headerPanel.setBounds(0, 0, 1200, 120);
         headerPanel.setBackground(Color.black);
-        headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        frame.add(headerPanel, BorderLayout.NORTH);
+        headerPanel.setLayout(new FlowLayout());
+        headerPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        pane.add(headerPanel, BorderLayout.NORTH);
 
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-//        panel.setBackground(Color.RED);
-//
-//        Button button = new Button("Button");
-//        panel.add(button);
-//        panel.setVisible(true);
-
-//        headerPanel.add(panel);
-
-
-
-        // Package1.Main Menu
+        // Main Panel
         mainPanel = new JPanel();
-//        mainPanel.setBounds(100, 130, 900, 600);
         mainPanel.setBackground(Color.red);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        frame.add(mainPanel, BorderLayout.CENTER);
+        pane.add(mainPanel, BorderLayout.CENTER);
 
+        //// Header Panel Content
         //lägg till saker i headerPanel
         JLabel titleNameLabel = new JLabel("LTU Library");
         titleNameLabel.setForeground(Color.white);
         titleNameLabel.setFont(bigFont);
         headerPanel.add(titleNameLabel);
 
-        JButton loginButton = new JButton("Login");
-        //Det är nåt som inte blir bra när man försöker flytta saker, oavsett vilket x-värde så samma plats.. :'(
-//        loginButton.setBounds(1200, 30,300, 50);
-        //loginButton.setLocation(1100,30);
-        loginButton.setFont(normalFont);
-        loginButton.setBackground(Color.WHITE);
-        loginButton.setFocusPainted(false);
-        loginButton.addActionListener(cHandler);
-        loginButton.setActionCommand("login");
-        headerPanel.add(loginButton);
+        JButton goToLoginButton = new JButton("Login");
+        goToLoginButton.setFont(normalFont);
+        goToLoginButton.setBackground(Color.WHITE);
+        goToLoginButton.setFocusPainted(false);
+        goToLoginButton.addActionListener(cHandler);
+        goToLoginButton.setActionCommand("login");
+        headerPanel.add(goToLoginButton);
 
         //
         JButton goToSearchButton = new JButton("Search");
-        //Det är nåt som inte blir bra när man försöker flytta saker, oavsett vilket x-värde så samma plats.. :'(
-//        goToSearchButton.setBounds(1200, 100,300, 50);
         goToSearchButton.setFont(normalFont);
         goToSearchButton.setBackground(Color.WHITE);
         goToSearchButton.setFocusPainted(false);
@@ -88,11 +65,12 @@ public class GUI {
         goToSearchButton.setActionCommand("search");
         headerPanel.add(goToSearchButton);
 
+        //// Main Panel Content
+
+        //// Search Panel
 
         //Search button
         searchBooksPanel = new JPanel();
-//        searchBooksPanel.setBounds(500, 350, 1000, 100);
-        searchBooksPanel.setPreferredSize(searchBooksPanel.getPreferredSize());
         searchBooksPanel.setBackground(Color.white);
         searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
         mainPanel.add(searchBooksPanel);
@@ -116,43 +94,45 @@ public class GUI {
         searchButton.setActionCommand("start");
         searchBooksPanel.add(searchButton);
 
-
-
-
-
-
-        //Login screen username
+        //// Login Panel / Screen
 
         //username text field
         loginPanel = new JPanel();
         loginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-
         mainPanel.add(loginPanel);
-
-        //usernamePanel.setBounds(300, 300, 200, 30);
-        //usernamePanel.setBackground(Color.white);
-        JTextField usernameField = new JTextField();
-        usernameField.setText("Please enter your username and password");
-        //usernameField.setPreferredSize(new Dimension(200,30));
-        usernameField.setBackground(Color.lightGray);
-        loginPanel.add(usernameField);
 
         //username label
         JLabel usernameLabel = new JLabel("Username: ");
-        usernameLabel.setForeground(Color.white);
+        usernameLabel.setForeground(Color.black);
         usernameLabel.setFont(normalFont);
         loginPanel.add(usernameLabel);
+
+        JTextField usernameField = new JTextField();
+        usernameField.setPreferredSize(new Dimension(200,30));
+        usernameField.setBackground(Color.lightGray);
+        loginPanel.add(usernameField);
+
+        //password label
+        JLabel passwordLabel = new JLabel("Password: ");
+        passwordLabel.setForeground(Color.black);
+        passwordLabel.setFont(normalFont);
+        loginPanel.add(passwordLabel);
 
         //password field
         JPasswordField passwordField = new JPasswordField();
         passwordField.setPreferredSize(new Dimension(200,30));
         passwordField.setBackground(Color.lightGray);
         loginPanel.add(passwordField);
-        //password label
-        JLabel passwordLabel = new JLabel("Password: ");
-        passwordLabel.setForeground(Color.black);
-        passwordLabel.setFont(normalFont);
-        loginPanel.add(passwordLabel);
+
+        //login button
+        JButton loginButton = new JButton("Login");
+        loginButton.setFont(normalFont);
+        loginButton.setBackground(Color.WHITE);
+        loginButton.setFocusPainted(false);
+        loginButton.addActionListener(cHandler);
+        loginButton.setActionCommand("login");
+        loginPanel.add(loginButton);
+
 
         //Testar att lägga in en text som kan synas/inte synas beroende på VisibilityManager
         JLabel loginScreenLabel = new JLabel("Please enter your username and password");
@@ -162,6 +142,8 @@ public class GUI {
         //sen när man vill att dom ska synas ändrar man i metoden i VisibilityManager
         loginScreenLabel.setVisible(false);
         loginPanel.add(loginScreenLabel);
+
+        frame.pack();
 
     }
 
