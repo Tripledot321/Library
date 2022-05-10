@@ -6,19 +6,52 @@ import java.util.List;
 
 public class DatabaseConn {
 
-    public static List<String> selectUsers(String searchParameter) {
+    private Connection databaseConnection;
+    private String url;
+    private String username;
+    private String password;
+
+    public DatabaseConn(String Url, String user, String password) {
+        this.url = Url;
+        this.username = user;
+        this.password = password;
+    }
+
+    private Connection getConnection(){
+        try {
+
+            if(databaseConnection != null && !databaseConnection.isClosed()) {
+                return databaseConnection;
+            }
+
+
+            databaseConnection = DriverManager.getConnection(
+                    "jdbc:mysql://"+url+"/libraryx?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+                    username, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return databaseConnection;
+    }
+
+    public List<String> getBooks(String searchTerm ) {
+        return new ArrayList<>();
+    }
+
+    public  List<String> selectUsers(String searchParameter) {
 
 
         List<String> searchResults = new ArrayList<>();
 
         try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/libraryx?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
-                    "root", "1234");
+            Connection conn = getConnection();
 
             Statement stmt = conn.createStatement();
 
             String strSelect = "select * from user where firstName='" + searchParameter + "'";
+
+
 
             ResultSet rset = stmt.executeQuery(strSelect);
             int rowCount = 0;
@@ -48,4 +81,7 @@ public class DatabaseConn {
     }
 
 
+    public boolean validateUser(String username, String password) {
+        return false;
+    }
 }
