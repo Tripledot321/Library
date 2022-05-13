@@ -19,6 +19,8 @@ public class GUI {
 
     private BookService _bookService;
     private UserService _userService;
+    //testar nedan
+    //private List<String> bookResult;
 
     public GUI(BookService bookService, UserService userService) {
         this._bookService = bookService;
@@ -135,17 +137,9 @@ public class GUI {
             searchBooksPanel = new JPanel();
             searchBooksPanel.setBackground(Color.white);
             searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
-
-            //osäker på hur göra med panelerna, vill ju att denna ska komma under searchBooksPanel
-//            JPanel searchResultsPanel = new JPanel();
-//            searchResultsPanel.setBackground(Color.red);
-//            searchResultsPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
-
             panel.add(searchBooksPanel);
 
-
-
-                //search fields with labels
+            //search fields with labels
 
             //search field
             JTextField searchField = new JTextField();
@@ -153,32 +147,42 @@ public class GUI {
             searchField.setBackground(Color.lightGray);
             searchBooksPanel.add(searchField);
 
+
             JButton searchButton = new JButton("Search");
             searchButton.setBackground(Color.black);
             searchButton.setForeground(Color.white);
             searchButton.setFont(normalFont);
             searchButton.setFocusPainted(false);
-
-//            JLabel noResult = new JLabel("No search results found in DataBase");
-//            noResult.setForeground(Color.black);
-//            noResult.setFont(normalFont);
-//            searchResultsPanel.add(noResult);
-
+            //egen actionlistner för denna knapp
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
 
                     var bookResult = _bookService.findBooks(searchField.getText());
+                    String bookResultString = bookResult.toString();
 
-                        if(bookResult == null) {
-                            JLabel noResult = new JLabel("No search results found in DataBase");
-                            noResult.setForeground(Color.black);
-                            noResult.setFont(normalFont);
-                            searchBooksPanel.add(noResult);
-                        }
-                        else{
-                            showBooksResult(searchBooksPanel, bookResult);
-                        }
+                    if(!bookResult.isEmpty()) {
+                        //tomas lösning nedan
+                        showBooksResult(searchBooksPanel, bookResult);
+
+                        JPanel bookResultPanel = new JPanel();
+                        bookResultPanel.setVisible(true);
+                        JLabel bookResultLabel = new JLabel(bookResultString);
+                        bookResultLabel.setVisible(true);
+                        bookResultLabel.setFont(smallFont);
+                        bookResultPanel.add(bookResultLabel);
+                        searchBooksPanel.add(bookResultPanel);
+
+                        System.out.println(bookResult);
+
+                    }
+                    else{
+                        JLabel noResult = new JLabel("No search results found in DataBase when button was clicked");
+                        System.out.println("No search results found in DataBase when button was clicked");
+                        noResult.setForeground(Color.black);
+                        noResult.setFont(normalFont);
+                        searchBooksPanel.add(noResult);
+                    }
 
 
                 }
@@ -242,6 +246,10 @@ public class GUI {
         // Create table
         /// populate table
         // show table in searchbookPanel
+
+
+
+
     }
         //// Login Panel / Screen
 

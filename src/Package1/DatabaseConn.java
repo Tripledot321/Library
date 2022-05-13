@@ -84,6 +84,45 @@ public class DatabaseConn {
         return searchResults;
     }
 
+    public  List<String> selectBooks(String searchParameter) {
+
+        List<String> searchResults = new ArrayList<>();
+
+        try {
+
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strSelect = "SELECT * from books WHERE title='"+searchParameter+"'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                String title = rset.getString("title");
+                String ISBN = rset.getString("ISBN");
+                String BookPublisher = rset.getString("BookPublisher");
+                String BookCategory = rset.getString("BookCategory");
+                String YearOfPublication = rset.getString("YearOfPublication");
+                String Classification = rset.getString("Classification");
+
+                String allInformation = title + ", " + ISBN + ", " + BookPublisher + ", " + BookCategory + ", " + YearOfPublication + ", " + Classification;
+
+                searchResults.add(allInformation);
+                ++rowCount;
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return searchResults;
+    }
+
 
     public boolean validateUser(String username, String password) {
         return false;

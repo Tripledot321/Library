@@ -15,9 +15,10 @@ public class BookService {
         System.out.println("Search service was requested to find books with search term '"+searchTerm+"'");
 
         database.getBooks(searchTerm);
-        database.selectUsers(searchTerm);
+        List<String> searchResults = database.selectBooks(searchTerm);
 
-        return new ArrayList<String>();
+        return searchResults;
+
     }
 
 
