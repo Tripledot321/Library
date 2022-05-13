@@ -24,6 +24,8 @@ public class DatabaseConn {
                 return databaseConnection;
             }
 
+            //testar enligt videon med koden nedan
+            //Class.forName("com.mysql.jdbc.Driver");
 
             databaseConnection = DriverManager.getConnection(
                     "jdbc:mysql://"+url+"/libraryx?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
@@ -45,11 +47,13 @@ public class DatabaseConn {
         List<String> searchResults = new ArrayList<>();
 
         try {
+
+
             Connection conn = getConnection();
 
             Statement stmt = conn.createStatement();
 
-            String strSelect = "select * from user where firstName='" + searchParameter + "'";
+            String strSelect = "SELECT * from user WHERE FName='" + searchParameter + "'";
 
 
 

@@ -57,6 +57,7 @@ public class GUI {
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        //mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         pane.add(mainPanel, BorderLayout.CENTER);
         mainPanel.setVisible(true);
 
@@ -126,8 +127,7 @@ public class GUI {
 
         //// HÄR STARTAR Main Panel Content, VARJE METOD ÄR EN 'SIDA' T.EX. LOGINSIDAN...
 
-
-        public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+            public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
 
             //// Search Panel
 
@@ -135,9 +135,17 @@ public class GUI {
             searchBooksPanel = new JPanel();
             searchBooksPanel.setBackground(Color.white);
             searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+
+            //osäker på hur göra med panelerna, vill ju att denna ska komma under searchBooksPanel
+//            JPanel searchResultsPanel = new JPanel();
+//            searchResultsPanel.setBackground(Color.red);
+//            searchResultsPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+
             panel.add(searchBooksPanel);
 
-            //search fields with labels
+
+
+                //search fields with labels
 
             //search field
             JTextField searchField = new JTextField();
@@ -151,13 +159,80 @@ public class GUI {
             searchButton.setFont(normalFont);
             searchButton.setFocusPainted(false);
 
+//            JLabel noResult = new JLabel("No search results found in DataBase");
+//            noResult.setForeground(Color.black);
+//            noResult.setFont(normalFont);
+//            searchResultsPanel.add(noResult);
+
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
+
                     var bookResult = _bookService.findBooks(searchField.getText());
-                    showBooksResult( searchBooksPanel, bookResult);
+
+                        if(bookResult == null) {
+                            JLabel noResult = new JLabel("No search results found in DataBase");
+                            noResult.setForeground(Color.black);
+                            noResult.setFont(normalFont);
+                            searchBooksPanel.add(noResult);
+                        }
+                        else{
+                            showBooksResult(searchBooksPanel, bookResult);
+                        }
+
+
                 }
             });
+
+
+//        public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+//
+//            //// Search Panel
+//
+//            //Search button
+//            searchBooksPanel = new JPanel();
+//            searchBooksPanel.setBackground(Color.white);
+//            searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+//            panel.add(searchBooksPanel);
+//
+//            //search fields with labels
+//
+//            //search field
+//            JTextField searchField = new JTextField();
+//            searchField.setPreferredSize(new Dimension(550, 30));
+//            searchField.setBackground(Color.lightGray);
+//            searchBooksPanel.add(searchField);
+//
+//            JButton searchButton = new JButton("Search");
+//            searchButton.setBackground(Color.black);
+//            searchButton.setForeground(Color.white);
+//            searchButton.setFont(normalFont);
+//            searchButton.setFocusPainted(false);
+//
+//            JLabel noResult = new JLabel("No search results found in DataBase");
+//            noResult.setForeground(Color.black);
+//            noResult.setFont(normalFont);
+//
+//
+//            searchButton.addActionListener(new ActionListener(){
+//
+//                public void actionPerformed(ActionEvent event){
+//
+//                    var bookResult = _bookService.findBooks(searchField.getText());
+//
+//                        if(bookResult == null) {
+//                            JLabel noResult = new JLabel("No search results found in DataBase");
+//                            noResult.setForeground(Color.black);
+//                            noResult.setFont(normalFont);
+//                            searchBooksPanel.add(noResult);
+//                        }
+//                        else{
+//                            showBooksResult(searchBooksPanel, bookResult);
+//                        }
+//
+//
+//                }
+//            });
 
 
             searchBooksPanel.add(searchButton);
