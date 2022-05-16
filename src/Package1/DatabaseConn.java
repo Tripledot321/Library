@@ -167,39 +167,6 @@ public class DatabaseConn {
         }
     }
 
-//    public boolean findUser(String personnummer) {
-//
-//        boolean userExists = false;
-//
-//        try {
-//            Connection conn = getConnection();
-//
-//            Statement stmt = conn.createStatement();
-//
-//            String strUser = "SELECT ssn FROM user WHERE SSN='"+personnummer+"'";
-//
-//            ResultSet rset = stmt.executeQuery(strUser);
-//
-//            int rowCount = 0;
-//
-//            while (rset.next()) {
-//
-//                personnummer = rset.getString("ssn");
-//
-//                ++rowCount;
-//            }
-//
-//            if(!personnummer.equalsIgnoreCase("")){
-//                userExists = true;
-//            }
-//
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        return userExists;
-//    }
-
     public void removeUser(String personnummer) {
         try {
             Connection conn = getConnection();
@@ -214,4 +181,55 @@ public class DatabaseConn {
             ex.printStackTrace();
         }
     }
+
+    public void addBook(String isbn, String bookPublisher, String bookCategory, String title, String yearOfPublication, String classification) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO books (ISBN, BookPublisher, BookCategory, title, YearOfPublication, Classification)" +
+                    "VALUES ('"+isbn+"', '"+bookPublisher+"', '"+bookCategory+"', '"+title+"', '"+yearOfPublication+"', '"+classification+"')";
+
+            int rset = stmt.executeUpdate(strInsert);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateBook(String isbn, String bookPublisher, String bookCategory, String title, String yearOfPublication, String classification) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strUpdate = "UPDATE books SET BookPublisher = '"+bookPublisher+"', BookCategory = '"+bookCategory+"', title = '"+title+"', YearOfPublication = '"+yearOfPublication+"' WHERE ISBN = '"+isbn+"'";
+
+            int rset = stmt.executeUpdate(strUpdate);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void removeBook(String isbn) {
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM books WHERE ISBN = '"+isbn+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

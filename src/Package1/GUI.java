@@ -172,7 +172,7 @@ public class GUI {
                     searchBooksPanel.remove(bookResultsLabel);
 
                     if(!bookResult.isEmpty()) {
-                        //tomas lösning nedan
+                        //fråga tomas, någonting blir weird, när man debuggar dyker det upp, annars inte..
                         showBooksResult(searchBooksPanel, bookResult);
                         System.out.println("I found a result");
                         JLabel bookResultLabel = new JLabel(bookResultString);
@@ -346,11 +346,11 @@ public class GUI {
         panel.add(registerUserPanel);
 
         //header Add or Edit user
-        JLabel header1Label = new JLabel("Add/Edit user");
+        JLabel header1Label = new JLabel("ADD/EDIT/REMOVE USER");
         header1Label.setForeground(Color.black);
         header1Label.setFont(normalFont);
         registerUserPanel.add(header1Label);
-        JLabel header2Label = new JLabel("(User will be edited if they exist)");
+        JLabel header2Label = new JLabel("");
         header2Label.setForeground(Color.black);
         header2Label.setFont(normalFont);
         registerUserPanel.add(header2Label);
@@ -446,54 +446,23 @@ public class GUI {
             public void actionPerformed(ActionEvent event){
 
                 String removeUser;
-                if(removeUserCheckbox.isSelected()){
-                    removeUser = "remove";
-                }
-                else{
-                    removeUser = "do not remove";
-                }
+                    if(removeUserCheckbox.isSelected()){
+                        removeUser = "remove";
+                    }
+                    else{
+                        removeUser = "do not remove";
+                    }
                 String editUser;
-                if(editUserCheckbox.isSelected()){
-                    editUser = "edit";
-                }
-                else{
-                    editUser = "do not edit";
-                }
-
+                    if(editUserCheckbox.isSelected()){
+                        editUser = "edit";
+                    }
+                    else{
+                        editUser = "do not edit";
+                    }
                 _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getName(), removeUser, editUser);
 
-
-//                JLabel bookResultsLabel = new JLabel();
-//                JLabel noResult = new JLabel();
-
-//                searchBooksPanel.remove(noResult);
-//                searchBooksPanel.remove(bookResultsLabel);
-//
-//                if(!bookResult.isEmpty()) {
-//                    //tomas lösning nedan
-//                    showBooksResult(searchBooksPanel, bookResult);
-//                    System.out.println("I found a result");
-//                    JLabel bookResultLabel = new JLabel(bookResultString);
-//                    bookResultLabel.setVisible(true);
-//                    bookResultLabel.setFont(smallFont);
-//                    searchBooksPanel.add(bookResultLabel);
-//                    searchBooksPanel.add(bookResultLabel, BorderLayout.PAGE_END);
-//
-//                    System.out.println(bookResult);
-//
-//                }
-//                else{
-//                    noResult = new JLabel("No search results found in DataBase when button was clicked");
-//                    System.out.println("No search results found in DataBase when button was clicked");
-//                    noResult.setForeground(Color.black);
-//                    noResult.setFont(normalFont);
-//                    searchBooksPanel.add(noResult, BorderLayout.PAGE_END);
-//                }
                 }
             });
-
-
-
     }
 
     public void createAddBookPanel(NavigationChoiceHandler cHandler, JPanel panel) {
@@ -573,55 +542,57 @@ public class GUI {
         classificationTextField.setBackground(Color.lightGray);
         addBookPanel.add(classificationTextField);
 
-        //barcode
-        JLabel barcodeLabel = new JLabel("Barcode: ");
-        barcodeLabel.setForeground(Color.black);
-        barcodeLabel.setFont(normalFont);
-        addBookPanel.add(barcodeLabel);
-        JTextField barcodeTextField = new JTextField();
-        barcodeTextField.setPreferredSize(new Dimension(400,30));
-        barcodeTextField.setBackground(Color.lightGray);
-        addBookPanel.add(barcodeTextField);
 
-        //physical location
-        JLabel physicalLocationLabel = new JLabel("Physical location: ");
-        physicalLocationLabel.setForeground(Color.black);
-        physicalLocationLabel.setFont(normalFont);
-        addBookPanel.add(physicalLocationLabel);
-        JTextField physicalLocationTextField = new JTextField();
-        physicalLocationTextField.setPreferredSize(new Dimension(400,30));
-        physicalLocationTextField.setBackground(Color.lightGray);
-        addBookPanel.add(physicalLocationTextField);
+        //edit book check box
+        JLabel editBookLabel = new JLabel("CHECK BOX TO EDIT ITEM");
+        editBookLabel.setForeground(Color.black);
+        editBookLabel.setFont(normalFont);
+        addBookPanel.add(editBookLabel);
+        JCheckBox editBookCheckBox = new JCheckBox();
+        addBookPanel.add(editBookCheckBox);
 
-        //status
-        JLabel statusLabel = new JLabel("Status: ");
-        statusLabel.setForeground(Color.black);
-        statusLabel.setFont(normalFont);
-        addBookPanel.add(statusLabel);
-        JTextField statusTextField = new JTextField();
-        statusTextField.setPreferredSize(new Dimension(400,30));
-        statusTextField.setBackground(Color.lightGray);
-        addBookPanel.add(statusTextField);
 
         //remove book check box
         JLabel removeBookLabel = new JLabel("CHECK BOX TO REMOVE ITEM");
         removeBookLabel.setForeground(Color.black);
         removeBookLabel.setFont(normalFont);
         addBookPanel.add(removeBookLabel);
-        JCheckBox removeBook = new JCheckBox();
-        addBookPanel.add(removeBook);
+        JCheckBox removeBookCheckBox = new JCheckBox();
+        addBookPanel.add(removeBookCheckBox);
+
 
         //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE BOOK
 
-        //register user button
-        JButton registerUserButton = new JButton("Register");
-        registerUserButton.setFont(normalFont);
-        registerUserButton.setBackground(Color.WHITE);
-        registerUserButton.setPreferredSize(new Dimension(150,30));
-        registerUserButton.setFocusPainted(false);
-        registerUserButton.addActionListener(cHandler);
-        registerUserButton.setActionCommand("registerBook");
-        addBookPanel.add(registerUserButton);
+        //register button
+        JButton registerBookButton = new JButton("Register");
+        registerBookButton.setFont(normalFont);
+        registerBookButton.setBackground(Color.WHITE);
+        registerBookButton.setPreferredSize(new Dimension(150,30));
+        registerBookButton.setFocusPainted(false);
+        registerBookButton.addActionListener(cHandler);
+        registerBookButton.setActionCommand("registerBook");
+        addBookPanel.add(registerBookButton);
+        registerBookButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent event){
+
+                String removeBook = "do not remove";
+
+                if(removeBookCheckBox.isSelected()){
+                    removeBook = "remove";
+                }
+
+
+                String editBook = "do not edit";
+                if(editBookCheckBox.isSelected()){
+                    editBook = "edit";
+                }
+
+
+                _bookService.updateBook(isbnTextField.getText(), publisherTextField.getText(), categoryTextField.getText(), titleTextField.getText(), yopTextField.getText(), classificationTextField.getText(), removeBook, editBook);
+
+            }
+        });
 
         //cancel register user button
         JButton cancelRegisterUserButton = new JButton("Cancel");
