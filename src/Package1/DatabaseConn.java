@@ -37,8 +37,12 @@ public class DatabaseConn {
         return databaseConnection;
     }
 
-    public List<String> getBooks(String searchTerm ) {
+    public List<String> getBooks(String searchTerm) {
         return new ArrayList<>();
+    }
+
+    public String insertUser(String userInfo){
+        return userInfo;
     }
 
     public  List<String> selectUsers(String searchParameter) {
@@ -126,5 +130,88 @@ public class DatabaseConn {
 
     public boolean validateUser(String username, String password) {
         return false;
+    }
+
+    public void addUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO user (Fname, Lname, Email, SSN, PhoneNumber, Status)" +
+                    "VALUES ('"+firstName+"', '"+lastName+"', '"+email+"', '"+personnummer+"', '"+phonenumber+"', '1')";
+
+            int rset = stmt.executeUpdate(strInsert);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+           String strUpdate = "UPDATE user SET Fname = '"+firstName+"', Lname = '"+lastName+"', Email = '"+email+"', PhoneNumber = '"+phonenumber+"' WHERE ssn = '"+personnummer+"'";
+
+            int rset = stmt.executeUpdate(strUpdate);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+//    public boolean findUser(String personnummer) {
+//
+//        boolean userExists = false;
+//
+//        try {
+//            Connection conn = getConnection();
+//
+//            Statement stmt = conn.createStatement();
+//
+//            String strUser = "SELECT ssn FROM user WHERE SSN='"+personnummer+"'";
+//
+//            ResultSet rset = stmt.executeQuery(strUser);
+//
+//            int rowCount = 0;
+//
+//            while (rset.next()) {
+//
+//                personnummer = rset.getString("ssn");
+//
+//                ++rowCount;
+//            }
+//
+//            if(!personnummer.equalsIgnoreCase("")){
+//                userExists = true;
+//            }
+//
+//
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return userExists;
+//    }
+
+    public void removeUser(String personnummer) {
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM user WHERE SSN='"+personnummer+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

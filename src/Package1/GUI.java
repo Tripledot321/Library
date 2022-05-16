@@ -136,7 +136,8 @@ public class GUI {
             //Search button
             searchBooksPanel = new JPanel();
             searchBooksPanel.setBackground(Color.white);
-            searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+            //searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
+            searchBooksPanel.setLayout(new BorderLayout());
             panel.add(searchBooksPanel);
 
             //search fields with labels
@@ -145,7 +146,8 @@ public class GUI {
             JTextField searchField = new JTextField();
             searchField.setPreferredSize(new Dimension(550, 30));
             searchField.setBackground(Color.lightGray);
-            searchBooksPanel.add(searchField);
+            searchBooksPanel.add(searchField, BorderLayout.CENTER);
+
 
 
             JButton searchButton = new JButton("Search");
@@ -153,7 +155,9 @@ public class GUI {
             searchButton.setForeground(Color.white);
             searchButton.setFont(normalFont);
             searchButton.setFocusPainted(false);
-            //egen actionlistner för denna knapp
+            searchBooksPanel.add(searchButton, BorderLayout.LINE_END);
+
+                //egen actionListner för denna knapp
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
@@ -161,94 +165,49 @@ public class GUI {
                     var bookResult = _bookService.findBooks(searchField.getText());
                     String bookResultString = bookResult.toString();
 
+                    JLabel bookResultsLabel = new JLabel();
+                    JLabel noResult = new JLabel();
+
+                    searchBooksPanel.remove(noResult);
+                    searchBooksPanel.remove(bookResultsLabel);
+
                     if(!bookResult.isEmpty()) {
                         //tomas lösning nedan
                         showBooksResult(searchBooksPanel, bookResult);
-
-                        JPanel bookResultPanel = new JPanel();
-                        bookResultPanel.setVisible(true);
+                        System.out.println("I found a result");
                         JLabel bookResultLabel = new JLabel(bookResultString);
                         bookResultLabel.setVisible(true);
                         bookResultLabel.setFont(smallFont);
-                        bookResultPanel.add(bookResultLabel);
-                        searchBooksPanel.add(bookResultPanel);
+                        searchBooksPanel.add(bookResultLabel);
+                        searchBooksPanel.add(bookResultLabel, BorderLayout.PAGE_END);
 
                         System.out.println(bookResult);
 
                     }
                     else{
-                        JLabel noResult = new JLabel("No search results found in DataBase when button was clicked");
+                        noResult = new JLabel("No search results found in DataBase when button was clicked");
                         System.out.println("No search results found in DataBase when button was clicked");
                         noResult.setForeground(Color.black);
                         noResult.setFont(normalFont);
-                        searchBooksPanel.add(noResult);
+                        searchBooksPanel.add(noResult, BorderLayout.PAGE_END);
                     }
-
-
                 }
             });
 
+            //searchBooksPanel.add(searchButton, BorderLayout.LINE_END);
 
-//        public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
-//
-//            //// Search Panel
-//
-//            //Search button
-//            searchBooksPanel = new JPanel();
-//            searchBooksPanel.setBackground(Color.white);
-//            searchBooksPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 5));
-//            panel.add(searchBooksPanel);
-//
-//            //search fields with labels
-//
-//            //search field
-//            JTextField searchField = new JTextField();
-//            searchField.setPreferredSize(new Dimension(550, 30));
-//            searchField.setBackground(Color.lightGray);
-//            searchBooksPanel.add(searchField);
-//
-//            JButton searchButton = new JButton("Search");
-//            searchButton.setBackground(Color.black);
-//            searchButton.setForeground(Color.white);
-//            searchButton.setFont(normalFont);
-//            searchButton.setFocusPainted(false);
-//
-//            JLabel noResult = new JLabel("No search results found in DataBase");
-//            noResult.setForeground(Color.black);
-//            noResult.setFont(normalFont);
-//
-//
-//            searchButton.addActionListener(new ActionListener(){
-//
-//                public void actionPerformed(ActionEvent event){
-//
-//                    var bookResult = _bookService.findBooks(searchField.getText());
-//
-//                        if(bookResult == null) {
-//                            JLabel noResult = new JLabel("No search results found in DataBase");
-//                            noResult.setForeground(Color.black);
-//                            noResult.setFont(normalFont);
-//                            searchBooksPanel.add(noResult);
-//                        }
-//                        else{
-//                            showBooksResult(searchBooksPanel, bookResult);
-//                        }
-//
-//
-//                }
-//            });
+//            JLabel labelX = new JLabel("Testar");
+//            labelX.setFont(normalFont);
+//            labelX.setPreferredSize(new Dimension(200, 300));
+//            searchBooksPanel.add(labelX, BorderLayout.PAGE_END);
 
 
-            searchBooksPanel.add(searchButton);
         }
 
     private void showBooksResult(JPanel searchBooksPanel, List<String> bookResult) {
         // Create table
         /// populate table
         // show table in searchbookPanel
-
-
-
 
     }
         //// Login Panel / Screen
@@ -459,8 +418,15 @@ public class GUI {
         removeUserLabel.setForeground(Color.black);
         removeUserLabel.setFont(normalFont);
         registerUserPanel.add(removeUserLabel);
-        JCheckBox removeUser = new JCheckBox();
-        registerUserPanel.add(removeUser);
+        JCheckBox removeUserCheckbox = new JCheckBox();
+        registerUserPanel.add(removeUserCheckbox);
+
+        JLabel editUserLabel = new JLabel("CHECK BOX TO EDIT USER");
+        editUserLabel.setForeground(Color.black);
+        editUserLabel.setFont(normalFont);
+        registerUserPanel.add(editUserLabel);
+        JCheckBox editUserCheckbox = new JCheckBox();
+        registerUserPanel.add(editUserCheckbox);
 
         //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE USER
 
@@ -474,15 +440,59 @@ public class GUI {
         registerUserButton.setActionCommand("registerUser");
         registerUserPanel.add(registerUserButton);
 
-        //cancel register user button
-        JButton cancelRegisterUserButton = new JButton("Cancel");
-        cancelRegisterUserButton.setFont(normalFont);
-        cancelRegisterUserButton.setBackground(Color.WHITE);
-        cancelRegisterUserButton.setPreferredSize(new Dimension(150,30));
-        cancelRegisterUserButton.setFocusPainted(false);
-        cancelRegisterUserButton.addActionListener(cHandler);
-        cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
-        registerUserPanel.add(cancelRegisterUserButton);
+//HÄR SKAPAR VI ATT KNAPPEN SKA INSERT ALLT I DATABASEN PÅ ANVÄNDARE...
+        registerUserButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent event){
+
+                String removeUser;
+                if(removeUserCheckbox.isSelected()){
+                    removeUser = "remove";
+                }
+                else{
+                    removeUser = "do not remove";
+                }
+                String editUser;
+                if(editUserCheckbox.isSelected()){
+                    editUser = "edit";
+                }
+                else{
+                    editUser = "do not edit";
+                }
+
+                _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getName(), removeUser, editUser);
+
+
+//                JLabel bookResultsLabel = new JLabel();
+//                JLabel noResult = new JLabel();
+
+//                searchBooksPanel.remove(noResult);
+//                searchBooksPanel.remove(bookResultsLabel);
+//
+//                if(!bookResult.isEmpty()) {
+//                    //tomas lösning nedan
+//                    showBooksResult(searchBooksPanel, bookResult);
+//                    System.out.println("I found a result");
+//                    JLabel bookResultLabel = new JLabel(bookResultString);
+//                    bookResultLabel.setVisible(true);
+//                    bookResultLabel.setFont(smallFont);
+//                    searchBooksPanel.add(bookResultLabel);
+//                    searchBooksPanel.add(bookResultLabel, BorderLayout.PAGE_END);
+//
+//                    System.out.println(bookResult);
+//
+//                }
+//                else{
+//                    noResult = new JLabel("No search results found in DataBase when button was clicked");
+//                    System.out.println("No search results found in DataBase when button was clicked");
+//                    noResult.setForeground(Color.black);
+//                    noResult.setFont(normalFont);
+//                    searchBooksPanel.add(noResult, BorderLayout.PAGE_END);
+//                }
+                }
+            });
+
+
 
     }
 
