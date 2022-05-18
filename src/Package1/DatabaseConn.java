@@ -128,11 +128,14 @@ public class DatabaseConn {
     }
 
 
-    public boolean validateUser(String username, String password) {
-        return false;
-    }
+//    public boolean validateUser(String username, String password) {
+//        return false;
+//    }
+//
+    public boolean validateUser (String username, String password) {
 
-    public void addUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType) {
+        boolean approvedUser = false;
+        List<String> searchResults = new ArrayList<>();
 
         try {
 
@@ -140,8 +143,53 @@ public class DatabaseConn {
 
             Statement stmt = conn.createStatement();
 
-            String strInsert = "INSERT INTO user (Fname, Lname, Email, SSN, PhoneNumber, Status)" +
-                    "VALUES ('"+firstName+"', '"+lastName+"', '"+email+"', '"+personnummer+"', '"+phonenumber+"', '1')";
+            String strSelect = "SELECT Password FROM user WHERE Username = '"+username+"'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                String passwordFromDB = rset.getString("Password");
+
+//                String allInformation = title + ", " + ISBN + ", " + BookPublisher + ", " + BookCategory + ", " + YearOfPublication + ", " + Classification;
+
+                    if(passwordFromDB.equals(password)){
+                        approvedUser = true;
+                    }
+//                searchResults.add(allInformation);
+                ++rowCount;
+            }
+
+
+//            int rset = stmt.executeUpdate(strInsert);
+////            String passwordInDB = rset.getString(strInsert);
+//            System.out.println(rset);
+//
+////            int rset = stmt.executeUpdate(strInsert);
+//
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return approvedUser;
+
+    }
+
+
+    public void addUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType, String username, String password) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO user (Fname, Lname, Email, SSN, PhoneNumber, Status, Username, Password)" +
+                    "VALUES ('"+firstName+"', '"+lastName+"', '"+email+"', '"+personnummer+"', '"+phonenumber+"', '1', '"+username+"', '"+password+"')";
 
             int rset = stmt.executeUpdate(strInsert);
 
@@ -150,7 +198,7 @@ public class DatabaseConn {
         }
     }
 
-    public void updateUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType) {
+    public void updateUser(String firstName, String lastName, String email, String personnummer, String phonenumber, String accountType, String username, String password) {
 
         try {
 
@@ -158,7 +206,7 @@ public class DatabaseConn {
 
             Statement stmt = conn.createStatement();
 
-           String strUpdate = "UPDATE user SET Fname = '"+firstName+"', Lname = '"+lastName+"', Email = '"+email+"', PhoneNumber = '"+phonenumber+"' WHERE ssn = '"+personnummer+"'";
+           String strUpdate = "UPDATE user SET Fname = '"+firstName+"', Lname = '"+lastName+"', Email = '"+email+"', PhoneNumber = '"+phonenumber+"', Username = '"+username+"', Password = '"+password+" WHERE ssn = '"+personnummer+"'";
 
             int rset = stmt.executeUpdate(strUpdate);
 

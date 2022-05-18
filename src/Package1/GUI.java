@@ -342,7 +342,7 @@ public class GUI {
 
         //username text field
         registerUserPanel = new JPanel();
-        registerUserPanel.setLayout(new GridLayout(10, 2, 10,5));
+        registerUserPanel.setLayout(new GridLayout(12, 2, 10,5));
         panel.add(registerUserPanel);
 
         //header Add or Edit user
@@ -375,7 +375,7 @@ public class GUI {
         lastnameTextField.setBackground(Color.lightGray);
         registerUserPanel.add(lastnameTextField);
 
-        //user lastname label and textfield
+        //user email label and textfield
         JLabel emailLabel = new JLabel("E-mail: ");
         emailLabel.setForeground(Color.black);
         emailLabel.setFont(normalFont);
@@ -404,6 +404,26 @@ public class GUI {
         phonenumberTextField.setPreferredSize(new Dimension(400,30));
         phonenumberTextField.setBackground(Color.lightGray);
         registerUserPanel.add(phonenumberTextField);
+
+        //user username label and textfield
+        JLabel usernameLabel = new JLabel("Username: ");
+        usernameLabel.setForeground(Color.black);
+        usernameLabel.setFont(normalFont);
+        registerUserPanel.add(usernameLabel);
+        JTextField usernameTextField = new JTextField();
+        usernameTextField.setPreferredSize(new Dimension(400,30));
+        usernameTextField.setBackground(Color.lightGray);
+        registerUserPanel.add(usernameTextField);
+
+        //user password label and textfield
+        JLabel passwordLabel = new JLabel("Password: ");
+        passwordLabel.setForeground(Color.black);
+        passwordLabel.setFont(normalFont);
+        registerUserPanel.add(passwordLabel);
+        JTextField passwordTextField = new JTextField();
+        passwordTextField.setPreferredSize(new Dimension(400,30));
+        passwordTextField.setBackground(Color.lightGray);
+        registerUserPanel.add(passwordTextField);
 
         //user account type label and dropdown menu
         JLabel accountTypeLabel = new JLabel("Account type: ");
@@ -459,7 +479,7 @@ public class GUI {
                     else{
                         editUser = "do not edit";
                     }
-                _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getName(), removeUser, editUser);
+                _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getName(), usernameTextField.getText(), passwordTextField.getText(), removeUser, editUser);
 
                 }
             });
