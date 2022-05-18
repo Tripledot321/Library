@@ -4,9 +4,30 @@ package Package1;
 public class VisibilityManager {
 
     GUI gui;
+    private UserService _userService;
 
-    public VisibilityManager(GUI userInterface) {
+    public VisibilityManager(GUI userInterface, UserService userService) {
         gui = userInterface;
+        _userService = userService;
+    }
+
+
+    public void showUserOptions(){
+
+        if(_userService.isAuthenticated()){
+            gui.goToMyAccountButton.setVisible(true);
+        }
+        else{
+            gui.goToMyAccountButton.setVisible(false);
+        }
+
+        if(_userService.isUserAdmin()){
+            gui.goToAdminButton.setVisible(true);
+        }
+        else{
+            gui.goToAdminButton.setVisible(false);
+        }
+
     }
 
     public void searchResults(){

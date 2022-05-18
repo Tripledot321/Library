@@ -16,6 +16,8 @@ public class NavigationChoiceHandler implements ActionListener {
 
         String yourChoice = event.getActionCommand();
 
+        visibilityManager.showUserOptions();
+
         switch(yourChoice) {
             case "start":
             case "search": visibilityManager.searchResults(); break;

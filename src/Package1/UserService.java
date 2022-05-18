@@ -5,8 +5,21 @@ import javax.swing.*;
 public class UserService {
 
     private DatabaseConn database;
+    private boolean isAdminLoggedIn;
     public UserService(DatabaseConn database){
         this.database = database;
+    }
+
+    public boolean isAuthenticated(){
+
+        //return true if user details are available, return false otherwise
+        return isAdminLoggedIn;
+    }
+
+    public boolean isUserAdmin(){
+
+        //return true if user is logged in, and has admin privilege
+        return isAdminLoggedIn;
     }
 
 
@@ -16,6 +29,11 @@ public class UserService {
 
         boolean result = database.validateUser(username, password);
 
+        //If result is false return false
+        //If result is true then get user details
+        //save user details in this class
+        isAdminLoggedIn = result;
+            //
             if(result == true){
                 JFrame f = new JFrame();
                 JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);

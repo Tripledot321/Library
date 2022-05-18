@@ -12,6 +12,7 @@ public class GUI {
 
     JFrame frame;
     JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanReservationPanel;
+    JButton goToMyAccountButton, goToAdminButton;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font headerFont = new Font("SERIF", Font.BOLD, 26);
     Font normalFont = new Font("SERIF", Font.PLAIN, 26);
@@ -81,6 +82,7 @@ public class GUI {
 
     public void populateHeaderPanel(NavigationChoiceHandler cHandler, JPanel headerPanel) {
 
+
             //// Header Panel Content
 
             //lägg till saker i headerPanel
@@ -108,22 +110,26 @@ public class GUI {
             headerPanel.add(goToSearchButton);
 
             //navigate to my account page button
-            JButton goToMyAccountButton = new JButton("My account");
+            goToMyAccountButton = new JButton("My account");
             goToMyAccountButton.setFont(normalFont);
             goToMyAccountButton.setBackground(Color.WHITE);
             goToMyAccountButton.setFocusPainted(false);
+            goToMyAccountButton.setVisible(false);
             goToMyAccountButton.addActionListener(cHandler);
             goToMyAccountButton.setActionCommand("myAccount");
             headerPanel.add(goToMyAccountButton);
 
             //navigate to my admin page button
-            JButton goToAdminButton = new JButton("Admin");
+            goToAdminButton = new JButton("Admin");
             goToAdminButton.setFont(normalFont);
             goToAdminButton.setBackground(Color.WHITE);
+            goToAdminButton.setVisible(false);
             goToAdminButton.setFocusPainted(false);
             goToAdminButton.addActionListener(cHandler);
             goToAdminButton.setActionCommand("admin");
             headerPanel.add(goToAdminButton);
+
+
 
 
     }
@@ -141,6 +147,10 @@ public class GUI {
             searchBooksPanel.setLayout(new BorderLayout());
             panel.add(searchBooksPanel);
 
+            JPanel resultsPanel = new JPanel();
+            resultsPanel.setBackground(Color.white);
+            resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+            panel.add(resultsPanel);
             //search fields with labels
 
             //search field
@@ -168,6 +178,10 @@ public class GUI {
 
                     JLabel bookResultsLabel = new JLabel();
                     JLabel noResults = new JLabel();
+
+                    //searchbookspanel ska ha en annan panel i sig, och sen kan jag setvisible
+                    //gör detta searchBooksPanel.removeAll(); i resultatspanelen som ligger i searchbookspanel
+                    //en label som varierar beroende på resultatet
 
                     //fråga Tomas den blir crazy andra ggn när man söker och gör inte raderna nedan?
                     noResults.setVisible(false);
@@ -245,8 +259,11 @@ public class GUI {
         loginButton.setFocusPainted(false);
         loginButton.addActionListener(new ActionListener(){
 
+            //här borde kommentaren dyka upp
             public void actionPerformed(ActionEvent event){
                 _userService.signInUser(usernameField.getText(), new String(passwordField.getPassword()));
+                //refresha knapparna
+                cHandler.actionPerformed(event);
             }
         });
         loginPanel.add(loginButton);
