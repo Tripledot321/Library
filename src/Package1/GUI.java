@@ -613,12 +613,12 @@ public class GUI {
         addDvdPanel.setLayout(new GridLayout(15, 2, 10,5));
         panel.add(addDvdPanel);
 
-        //header Add or Edit user
-        JLabel header1Label = new JLabel("Add/Edit/Delete");
+        //header Add or Edit DVD
+        JLabel header1Label = new JLabel("Add/Edit/Delete DVD");
         header1Label.setForeground(Color.black);
         header1Label.setFont(normalFont);
         addDvdPanel.add(header1Label);
-        JLabel header2Label = new JLabel("Books/Articles..");
+        JLabel header2Label = new JLabel("");
         header2Label.setForeground(Color.black);
         header2Label.setFont(normalFont);
         addDvdPanel.add(header2Label);
@@ -633,25 +633,25 @@ public class GUI {
         titleTextField.setBackground(Color.lightGray);
         addDvdPanel.add(titleTextField);
 
-        //ISBN
-        JLabel isbnLabel = new JLabel("ISBN: ");
-        isbnLabel.setForeground(Color.black);
-        isbnLabel.setFont(normalFont);
-        addDvdPanel.add(isbnLabel);
-        JTextField isbnTextField = new JTextField();
-        isbnTextField.setPreferredSize(new Dimension(400,30));
-        isbnTextField.setBackground(Color.lightGray);
-        addDvdPanel.add(isbnTextField);
+        //director
+        JLabel directorLabel = new JLabel("Director: ");
+        directorLabel.setForeground(Color.black);
+        directorLabel.setFont(normalFont);
+        addDvdPanel.add(directorLabel);
+        JTextField directorTextField = new JTextField();
+        directorTextField.setPreferredSize(new Dimension(400,30));
+        directorTextField.setBackground(Color.lightGray);
+        addDvdPanel.add(directorTextField);
 
-        //publisher
-        JLabel publisherLabel = new JLabel("Publisher: ");
-        publisherLabel.setForeground(Color.black);
-        publisherLabel.setFont(normalFont);
-        addDvdPanel.add(publisherLabel);
-        JTextField publisherTextField = new JTextField();
-        publisherTextField.setPreferredSize(new Dimension(400,30));
-        publisherTextField.setBackground(Color.lightGray);
-        addDvdPanel.add(publisherTextField);
+        //producer
+        JLabel producerLabel = new JLabel("Producer: ");
+        producerLabel.setForeground(Color.black);
+        producerLabel.setFont(normalFont);
+        addDvdPanel.add(producerLabel);
+        JTextField producerTextField = new JTextField();
+        producerTextField.setPreferredSize(new Dimension(400,30));
+        producerTextField.setBackground(Color.lightGray);
+        addDvdPanel.add(producerTextField);
 
         //Category
         JLabel categoryLabel = new JLabel("Category: ");
@@ -664,7 +664,7 @@ public class GUI {
         addDvdPanel.add(categoryTextField);
 
         //year of publication
-        JLabel yopLabel = new JLabel("Year of publication: ");
+        JLabel yopLabel = new JLabel("Classification: ");
         yopLabel.setForeground(Color.black);
         yopLabel.setFont(normalFont);
         addDvdPanel.add(yopLabel);
@@ -674,7 +674,7 @@ public class GUI {
         addDvdPanel.add(yopTextField);
 
         //classification
-        JLabel classificationLabel = new JLabel("Classification: ");
+        JLabel classificationLabel = new JLabel("Year of publication: ");
         classificationLabel.setForeground(Color.black);
         classificationLabel.setFont(normalFont);
         addDvdPanel.add(classificationLabel);
@@ -683,65 +683,72 @@ public class GUI {
         classificationTextField.setBackground(Color.lightGray);
         addDvdPanel.add(classificationTextField);
 
-        //barcode
-        JLabel barcodeLabel = new JLabel("Barcode: ");
-        barcodeLabel.setForeground(Color.black);
-        barcodeLabel.setFont(normalFont);
-        addDvdPanel.add(barcodeLabel);
-        JTextField barcodeTextField = new JTextField();
-        barcodeTextField.setPreferredSize(new Dimension(400,30));
-        barcodeTextField.setBackground(Color.lightGray);
-        addDvdPanel.add(barcodeTextField);
+        //country
+        JLabel countryLabel = new JLabel("Country: ");
+        countryLabel.setForeground(Color.black);
+        countryLabel.setFont(normalFont);
+        addDvdPanel.add(countryLabel);
+        JTextField countryTextField = new JTextField();
+        countryTextField.setPreferredSize(new Dimension(400,30));
+        countryTextField.setBackground(Color.lightGray);
+        addDvdPanel.add(countryTextField);
 
-        //physical location
-        JLabel physicalLocationLabel = new JLabel("Physical location: ");
-        physicalLocationLabel.setForeground(Color.black);
-        physicalLocationLabel.setFont(normalFont);
-        addDvdPanel.add(physicalLocationLabel);
-        JTextField physicalLocationTextField = new JTextField();
-        physicalLocationTextField.setPreferredSize(new Dimension(400,30));
-        physicalLocationTextField.setBackground(Color.lightGray);
-        addDvdPanel.add(physicalLocationTextField);
-
-        //status
-        JLabel statusLabel = new JLabel("Status: ");
-        statusLabel.setForeground(Color.black);
-        statusLabel.setFont(normalFont);
-        addDvdPanel.add(statusLabel);
-        JTextField statusTextField = new JTextField();
-        statusTextField.setPreferredSize(new Dimension(400,30));
-        statusTextField.setBackground(Color.lightGray);
-        addDvdPanel.add(statusTextField);
+        //edit dvd check box
+        JLabel editDvdLabel = new JLabel("CHECK BOX TO EDIT ITEM");
+        editDvdLabel.setForeground(Color.black);
+        editDvdLabel.setFont(normalFont);
+        addDvdPanel.add(editDvdLabel);
+        JCheckBox editDvdCheckBox = new JCheckBox();
+        addDvdPanel.add(editDvdCheckBox);
 
         //remove DVD check box
         JLabel removeDvdLabel = new JLabel("CHECK BOX TO REMOVE ITEM");
         removeDvdLabel.setForeground(Color.black);
         removeDvdLabel.setFont(normalFont);
         addDvdPanel.add(removeDvdLabel);
-        JCheckBox removeDvd = new JCheckBox();
-        addDvdPanel.add(removeDvd);
+        JCheckBox removeDvdCheckBox = new JCheckBox();
+        addDvdPanel.add(removeDvdCheckBox);
 
         //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE DVD
 
-        //register user button
-        JButton registerUserButton = new JButton("Register");
-        registerUserButton.setFont(normalFont);
-        registerUserButton.setBackground(Color.WHITE);
-        registerUserButton.setPreferredSize(new Dimension(150,30));
-        registerUserButton.setFocusPainted(false);
-        registerUserButton.addActionListener(cHandler);
-        registerUserButton.setActionCommand("registerBook");
-        addDvdPanel.add(registerUserButton);
+        //register dvd button
+        JButton registerDvdButton = new JButton("Register");
+        registerDvdButton.setFont(normalFont);
+        registerDvdButton.setBackground(Color.WHITE);
+        registerDvdButton.setPreferredSize(new Dimension(150,30));
+        registerDvdButton.setFocusPainted(false);
+        addDvdPanel.add(registerDvdButton);
+        registerDvdButton.addActionListener(new ActionListener(){
 
-        //cancel register user button
-        JButton cancelRegisterUserButton = new JButton("Cancel");
-        cancelRegisterUserButton.setFont(normalFont);
-        cancelRegisterUserButton.setBackground(Color.WHITE);
-        cancelRegisterUserButton.setPreferredSize(new Dimension(150,30));
-        cancelRegisterUserButton.setFocusPainted(false);
-        cancelRegisterUserButton.addActionListener(cHandler);
-        cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
-        addDvdPanel.add(cancelRegisterUserButton);
+            public void actionPerformed(ActionEvent event){
+
+                String removeDvd = "do not remove";
+
+                if(removeDvdCheckBox.isSelected()){
+                    removeDvd = "remove";
+                }
+
+
+                String editDvd = "do not edit";
+                if(editDvdCheckBox.isSelected()){
+                    editDvd = "edit";
+                }
+
+
+                _bookService.updateDvd(directorTextField.getText(), producerTextField.getText(), categoryTextField.getText(), classificationTextField.getText(), yopTextField.getText(), titleTextField.getText(), countryTextField.getText(), removeDvd, editDvd);
+
+            }
+        });
+
+        //cancel register DVD button
+        JButton cancelRegisterDvdButton = new JButton("Cancel");
+        cancelRegisterDvdButton.setFont(normalFont);
+        cancelRegisterDvdButton.setBackground(Color.WHITE);
+        cancelRegisterDvdButton.setPreferredSize(new Dimension(150,30));
+        cancelRegisterDvdButton.setFocusPainted(false);
+        cancelRegisterDvdButton.addActionListener(cHandler);
+        cancelRegisterDvdButton.setActionCommand("cancelRegisterUser");
+        addDvdPanel.add(cancelRegisterDvdButton);
 
     }
 

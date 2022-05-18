@@ -232,4 +232,54 @@ public class DatabaseConn {
         }
     }
 
+    public void addDvd(String director, String producer, String dvdCategory, String classification, String yearOfPublication, String title, String country) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO dvd (Director, Producer, DVDCategory, Classification, YearOfPublication, title, ProductionCountry)" +
+                    "VALUES ('"+director+"', '"+producer+"', '"+dvdCategory+"', '"+classification+"', '"+yearOfPublication+"', '"+title+"', '"+country+"')";
+
+            int rset = stmt.executeUpdate(strInsert);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateDvd(String director, String producer, String dvdCategory, String classification, String yearOfPublication, String title, String country) {
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strUpdate = "UPDATE dvd SET Director = '"+director+"', Producer = '"+producer+"', DVDCategory = '"+dvdCategory+"', Classification = '"+classification+"', YearOfPublication = '"+yearOfPublication+"', ProductionCountry = '"+country+"' WHERE title = '"+title+"'";
+
+            int rset = stmt.executeUpdate(strUpdate);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void removeDvd(String title) {
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM dvd WHERE title = '"+title+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
