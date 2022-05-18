@@ -1,12 +1,12 @@
 package Package1;
 
+
 public class VisibilityManager {
 
     GUI gui;
 
     public VisibilityManager(GUI userInterface) {
         gui = userInterface;
-
     }
 
     public void searchResults(){
@@ -18,7 +18,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void loginScreen(){
@@ -30,7 +29,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void myAccountScreen(){
@@ -42,7 +40,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void adminScreen(){
@@ -54,7 +51,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void registerUserScreen(){
@@ -66,7 +62,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void registerBookScreen(){
@@ -78,7 +73,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(true);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void registerDvdScreen(){
@@ -90,7 +84,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(true);
         gui.editLoanReservationPanel.setVisible(false);
-
     }
 
     public void editLoanReservationScreen(){
@@ -102,7 +95,6 @@ public class VisibilityManager {
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
         gui.editLoanReservationPanel.setVisible(true);
-
     }
 
 

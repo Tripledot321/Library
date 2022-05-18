@@ -9,12 +9,21 @@ public class UserService {
         this.database = database;
     }
 
+
     public void signInUser(String username, String password){
 
         System.out.println("User service was requested to sign in username: '"+username+"' and user password: '"+password+"'");
 
         boolean result = database.validateUser(username, password);
-        System.out.println(result);
+
+            if(result == true){
+                JFrame f = new JFrame();
+                JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);
+            }
+            else{
+                JFrame f2 = new JFrame();
+                JOptionPane.showMessageDialog(f2, "You could not be signed in, please try again");
+            }
     }
 
 
@@ -38,5 +47,21 @@ public class UserService {
                 JFrame f2 = new JFrame();
                 JOptionPane.showMessageDialog(f2, "User was added to database");
         }
+    }
+
+    public void editLoanUser(String personnummer, String barcode, String removeLoanReservation){
+        System.out.println("User service was requested to edit a loan for a user");
+
+        if(removeLoanReservation.equalsIgnoreCase("remove")){
+            database.removeLoanReservation(barcode);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Loan/Reservation for book: "+barcode+" was removed for: "+personnummer);
+        }
+        else {
+            database.addLoanReservation(personnummer, barcode);
+            JFrame f2 = new JFrame();
+            JOptionPane.showMessageDialog(f2, "Loan/Reservation for book: "+barcode+" was added for: "+personnummer);
+        }
+
     }
 }

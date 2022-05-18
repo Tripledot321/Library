@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 
 //min kommentar
@@ -78,7 +79,7 @@ public class GUI {
 
     }
 
-        public void populateHeaderPanel(NavigationChoiceHandler cHandler, JPanel headerPanel) {
+    public void populateHeaderPanel(NavigationChoiceHandler cHandler, JPanel headerPanel) {
 
             //// Header Panel Content
 
@@ -125,11 +126,11 @@ public class GUI {
             headerPanel.add(goToAdminButton);
 
 
-        }
+    }
 
         //// HÄR STARTAR Main Panel Content, VARJE METOD ÄR EN 'SIDA' T.EX. LOGINSIDAN...
 
-            public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+    public void createSearchPanel(NavigationChoiceHandler cHandler, JPanel panel) {
 
             //// Search Panel
 
@@ -166,43 +167,37 @@ public class GUI {
                     String bookResultString = bookResult.toString();
 
                     JLabel bookResultsLabel = new JLabel();
-                    JLabel noResult = new JLabel();
+                    JLabel noResults = new JLabel();
 
-                    searchBooksPanel.remove(noResult);
+                    //fråga Tomas den blir crazy andra ggn när man söker och gör inte raderna nedan?
+                    noResults.setVisible(false);
+                    bookResultsLabel.setVisible(false);
+                    searchBooksPanel.remove(noResults);
                     searchBooksPanel.remove(bookResultsLabel);
+                    frame.pack();
 
                     if(!bookResult.isEmpty()) {
-                        //fråga tomas, någonting blir weird, när man debuggar dyker det upp, annars inte..
-                        showBooksResult(searchBooksPanel, bookResult);
                         System.out.println("I found a result");
-                        JLabel bookResultLabel = new JLabel(bookResultString);
-                        bookResultLabel.setVisible(true);
-                        bookResultLabel.setFont(smallFont);
-                        searchBooksPanel.add(bookResultLabel);
-                        searchBooksPanel.add(bookResultLabel, BorderLayout.PAGE_END);
-
+                        bookResultsLabel = new JLabel(bookResultString);
+                        bookResultsLabel.setVisible(true);
+                        bookResultsLabel.setFont(smallFont);
+                        searchBooksPanel.add(bookResultsLabel, BorderLayout.PAGE_END);
                         System.out.println(bookResult);
-
+                        frame.pack();
                     }
                     else{
-                        noResult = new JLabel("No search results found in DataBase when button was clicked");
                         System.out.println("No search results found in DataBase when button was clicked");
-                        noResult.setForeground(Color.black);
-                        noResult.setFont(normalFont);
-                        searchBooksPanel.add(noResult, BorderLayout.PAGE_END);
+                        noResults = new JLabel("No search results found");
+                        noResults.setVisible(true);
+                        noResults.setForeground(Color.black);
+                        noResults.setFont(normalFont);
+                        searchBooksPanel.add(noResults, BorderLayout.PAGE_END);
+                        frame.pack();
                     }
                 }
             });
 
-            //searchBooksPanel.add(searchButton, BorderLayout.LINE_END);
-
-//            JLabel labelX = new JLabel("Testar");
-//            labelX.setFont(normalFont);
-//            labelX.setPreferredSize(new Dimension(200, 300));
-//            searchBooksPanel.add(labelX, BorderLayout.PAGE_END);
-
-
-        }
+    }
 
     private void showBooksResult(JPanel searchBooksPanel, List<String> bookResult) {
         // Create table
@@ -210,6 +205,7 @@ public class GUI {
         // show table in searchbookPanel
 
     }
+
         //// Login Panel / Screen
 
     public void createLoginPanel(NavigationChoiceHandler cHandler, JPanel panel) {
@@ -459,8 +455,7 @@ public class GUI {
         registerUserButton.addActionListener(cHandler);
         registerUserButton.setActionCommand("registerUser");
         registerUserPanel.add(registerUserButton);
-
-//HÄR SKAPAR VI ATT KNAPPEN SKA INSERT ALLT I DATABASEN PÅ ANVÄNDARE...
+        //HÄR SKAPAR VI ATT KNAPPEN SKA INSERT ALLT I DATABASEN PÅ ANVÄNDARE...
         registerUserButton.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent event){
@@ -801,35 +796,50 @@ public class GUI {
         editLoanReservationPanel.add(barcodeTextField);
 
         //UserID
-        JLabel userIdLabel = new JLabel("UserID: ");
-        userIdLabel.setForeground(Color.black);
-        userIdLabel.setFont(normalFont);
-        editLoanReservationPanel.add(userIdLabel);
-        JTextField userIdTextField = new JTextField();
-        userIdTextField.setPreferredSize(new Dimension(400,30));
-        userIdTextField.setBackground(Color.lightGray);
-        editLoanReservationPanel.add(userIdTextField);
+        JLabel userPersonnummerLabel = new JLabel("User personnummer: ");
+        userPersonnummerLabel.setForeground(Color.black);
+        userPersonnummerLabel.setFont(normalFont);
+        editLoanReservationPanel.add(userPersonnummerLabel);
+        JTextField userPersonnummerTextField = new JTextField();
+        userPersonnummerTextField.setPreferredSize(new Dimension(400,30));
+        userPersonnummerTextField.setBackground(Color.lightGray);
+        editLoanReservationPanel.add(userPersonnummerTextField);
 
-
-        //remove DVD check box
+        //remove loan/reservation check box
         JLabel removeLoanReservationLabel = new JLabel("CHECK BOX TO REMOVE LOAN/RESERVATION");
         removeLoanReservationLabel.setForeground(Color.black);
         removeLoanReservationLabel.setFont(normalFont);
         editLoanReservationPanel.add(removeLoanReservationLabel);
-        JCheckBox removeLoanReservation = new JCheckBox();
-        editLoanReservationPanel.add(removeLoanReservation);
+        JCheckBox removeLoanReservationCheckBox = new JCheckBox();
+        editLoanReservationPanel.add(removeLoanReservationCheckBox);
 
         //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE LOAN/RESERVATION
 
         //register user button
-        JButton registerUserButton = new JButton("Register");
-        registerUserButton.setFont(normalFont);
-        registerUserButton.setBackground(Color.WHITE);
-        registerUserButton.setPreferredSize(new Dimension(150,30));
-        registerUserButton.setFocusPainted(false);
-        registerUserButton.addActionListener(cHandler);
-        registerUserButton.setActionCommand("registerLoanReservation");
-        editLoanReservationPanel.add(registerUserButton);
+        JButton registerLoanButton = new JButton("Register");
+        registerLoanButton.setFont(normalFont);
+        registerLoanButton.setBackground(Color.WHITE);
+        registerLoanButton.setPreferredSize(new Dimension(150,30));
+        registerLoanButton.setFocusPainted(false);
+        registerLoanButton.addActionListener(cHandler);
+        registerLoanButton.setActionCommand("registerLoanReservation");
+        editLoanReservationPanel.add(registerLoanButton);
+        registerLoanButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent event){
+
+                String removeLoan = "do not remove";
+
+                if(removeLoanReservationCheckBox.isSelected()){
+                    removeLoan = "remove";
+                }
+
+                _userService.editLoanUser(userPersonnummerTextField.getText(), barcodeTextField.getText(), removeLoan);
+
+            }
+        });
+
+
 
         //cancel register user button
         JButton cancelRegisterUserButton = new JButton("Cancel");

@@ -1,8 +1,12 @@
 package Package1;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Date;
 
 public class DatabaseConn {
 
@@ -127,11 +131,6 @@ public class DatabaseConn {
         return searchResults;
     }
 
-
-//    public boolean validateUser(String username, String password) {
-//        return false;
-//    }
-//
     public boolean validateUser (String username, String password) {
 
         boolean approvedUser = false;
@@ -153,30 +152,17 @@ public class DatabaseConn {
 
                 String passwordFromDB = rset.getString("Password");
 
-//                String allInformation = title + ", " + ISBN + ", " + BookPublisher + ", " + BookCategory + ", " + YearOfPublication + ", " + Classification;
-
                     if(passwordFromDB.equals(password)){
                         approvedUser = true;
                     }
-//                searchResults.add(allInformation);
                 ++rowCount;
             }
-
-
-//            int rset = stmt.executeUpdate(strInsert);
-////            String passwordInDB = rset.getString(strInsert);
-//            System.out.println(rset);
-//
-////            int rset = stmt.executeUpdate(strInsert);
-//
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
         return approvedUser;
-
     }
 
 
@@ -330,4 +316,89 @@ public class DatabaseConn {
         }
     }
 
+    public void addLoanReservation(String personnummer, String barCode) {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date todayDate = new Date();
+        String todayDateString = dateFormat.format(todayDate);
+        System.out.println("Start date: "+dateFormat.format(todayDate));
+
+
+        // convert date to calendar
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(todayDate);
+        cal.add(Calendar.DATE, 21);
+
+        // convert calendar to date
+        Date endDate = cal.getTime();
+        String endDateString = dateFormat.format(endDate);
+        System.out.println("End date: "+dateFormat.format(endDate));
+
+        String userIdFromDb = null;
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+
+            String strUserId = "SELECT UserID FROM user WHERE ssn = '"+personnummer+"'";
+
+            ResultSet rset = stmt.executeQuery(strUserId);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                userIdFromDb = rset.getString("UserID");
+
+                ++rowCount;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO loan (Startdate, Enddate, Barcode, UserId)" +
+                    "VALUES ('"+todayDateString+"', '"+endDateString+"', '"+barCode+"', '"+userIdFromDb+"')";
+
+            int rset = stmt.executeUpdate(strInsert);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+    }
+
+    public void removeLoanReservation(String barcode) {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date returnDate = new Date();
+        String returnDateString = dateFormat.format(returnDate);
+        System.out.println("Return date: "+dateFormat.format(returnDate));
+
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM loan WHERE Barcode = '"+barcode+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
 }
