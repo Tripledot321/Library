@@ -1,5 +1,6 @@
 package Package1;
 
+import javax.swing.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -463,14 +464,14 @@ public class DatabaseConn {
 
         try {
 
-            Connection conn = getConnection();
-            Statement stmt = conn.createStatement();
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
 
-            String strUserId = "SELECT UserID FROM user WHERE ssn = '"+personnummer+"'";
+        String strUserId = "SELECT UserID FROM user WHERE ssn = '"+personnummer+"'";
 
-            ResultSet rset = stmt.executeQuery(strUserId);
+        ResultSet rset = stmt.executeQuery(strUserId);
 
-            int rowCount = 0;
+        int rowCount = 0;
 
             while (rset.next()) {
 
@@ -478,7 +479,6 @@ public class DatabaseConn {
 
                 ++rowCount;
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -497,5 +497,180 @@ public class DatabaseConn {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void addBookCopy(String barcode, String physicalLocation, String isbn, String status) {
+
+        String isbnDB = null;
+
+        try {
+
+            Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+
+            String strIsbn = "SELECT ISBN FROM books WHERE ISBN = '"+isbn+"'";
+
+            ResultSet rset = stmt.executeQuery(strIsbn);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                isbnDB = rset.getString("ISBN");
+
+                ++rowCount;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        JFrame f = new JFrame();
+
+        if(!(isbnDB == null)) {
+
+            JOptionPane.showMessageDialog(f, "Copy was successfully added");
+
+            try {
+
+                Connection conn = getConnection();
+
+                Statement stmt = conn.createStatement();
+
+                String strInsert = "INSERT INTO copy (Barcode, PhysicalLocation, Status, ISBN)" +
+                        "VALUES ('" + barcode + "', '" + physicalLocation + "', '" + status + "', '" + isbn + "')";
+
+                int rset = stmt.executeUpdate(strInsert);
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(f, "Could not add copy, make sure ISBN exist by adding the book");
+        }
+    }
+
+    public void removeBookCopy(String barcode) {
+
+        JFrame f2 = new JFrame();
+        JOptionPane.showMessageDialog(f2, "Item "+barcode+" was deleted from database");
+
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM copy WHERE Barcode = '"+barcode+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addDvdCopy(String barcode, String physicalLocation, String status, String movieId) {
+
+        String movieDB = null;
+
+        try {
+
+            Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+
+            String strMovieId = "SELECT MovieID FROM dvd WHERE MovieID = '"+movieId+"'";
+
+            ResultSet rset = stmt.executeQuery(strMovieId);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                movieDB = rset.getString("MovieID");
+
+                ++rowCount;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        JFrame f = new JFrame();
+
+        if(!(movieDB == null)) {
+
+            JOptionPane.showMessageDialog(f, "Copy was successfully added");
+
+            try {
+
+                Connection conn = getConnection();
+
+                Statement stmt = conn.createStatement();
+
+                String strInsert = "INSERT INTO copy (Barcode, PhysicalLocation, Status, MovieID)" +
+                        "VALUES ('" + barcode + "', '" + physicalLocation + "', '" + status + "', '" + movieId + "')";
+
+                int rset = stmt.executeUpdate(strInsert);
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(f, "Could not add copy, make sure MovieID exist by adding the dvd");
+        }
+    }
+
+    public void removeDvdCopy(String barcode) {
+
+        JFrame f = new JFrame();
+        JOptionPane.showMessageDialog(f, "Could not add copy, make sure MovieID exist by adding the dvd");
+
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM copy WHERE Barcode = '"+barcode+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean getAccountType(String username) {
+
+        boolean isAdmin = false;
+
+        List<String> searchResults = new ArrayList<>();
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strSelect = "SELECT AccountType FROM user WHERE Username = '"+username+"'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                String accountTypeFromDB = rset.getString("AccountType");
+
+                if(accountTypeFromDB.equalsIgnoreCase("admin")){
+                    isAdmin = true;
+                }
+                ++rowCount;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return isAdmin;
     }
 }

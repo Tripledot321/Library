@@ -1,8 +1,6 @@
 package Package1;
 
 import javax.swing.*;
-import java.awt.print.Book;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
@@ -68,4 +66,30 @@ public class BookService {
     }
 
 
+    public void updateBookCopy(String barcode, String physicalLocation, String isbn, String status, String removeItem) {
+
+        System.out.println("Book update copy service was requested");
+
+        //testa ifall checkboxen "remove copy" är ikryssad, detta är prio över edit
+        if(removeItem.equalsIgnoreCase("remove")){
+            database.removeBookCopy(barcode);
+        }
+        else {
+            database.addBookCopy(barcode, physicalLocation, isbn, status);
+        }
+    }
+
+    public void updateDvdCopy(String barcode, String physicalLocation, String movieId, String status, String removeItem) {
+
+        System.out.println("Book update service was requested");
+
+        //testa ifall checkboxen "remove dvd" är ikryssad, detta är prio över edit
+        if(removeItem.equalsIgnoreCase("remove")){
+            database.removeDvdCopy(barcode);
+        }
+        else {
+            database.addDvdCopy(barcode, physicalLocation, status, movieId);
+            JFrame f2 = new JFrame();
+        }
+    }
 }

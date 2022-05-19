@@ -10,7 +10,7 @@ import java.util.List;
 public class GUI {
 
     JFrame frame;
-    JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanPanel, editReservationPanel;
+    JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanPanel, editReservationPanel, addItemCopyPanel;
     JButton goToMyAccountButton, goToAdminButton;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font headerFont = new Font("SERIF", Font.BOLD, 26);
@@ -75,6 +75,7 @@ public class GUI {
         createAddDvdPanel(cHandler,mainPanel);
         createEditLoanPanel(cHandler, mainPanel);
         createEditReservationPanel(cHandler, mainPanel);
+        createAddItemCopyPanel(cHandler, mainPanel);
 
         frame.pack();
 
@@ -330,7 +331,7 @@ public class GUI {
         goToRegisterBookButton.setActionCommand("registerBook");
         adminPanel.add(goToRegisterBookButton);
 
-        //Knapp add/edit object
+        //add/edit/remove dvd
         JButton goToRegisterDvdButton = new JButton("Add/Edit/Remove DVD");
         goToRegisterDvdButton.setFont(normalFont);
         goToRegisterDvdButton.setBackground(Color.WHITE);
@@ -339,6 +340,16 @@ public class GUI {
         goToRegisterDvdButton.addActionListener(cHandler);
         goToRegisterDvdButton.setActionCommand("registerDvd");
         adminPanel.add(goToRegisterDvdButton);
+
+        //Knapp add/edit/remove copy
+        JButton goToEditCopyButton = new JButton("Add/Edit/Remove copies");
+        goToEditCopyButton.setFont(normalFont);
+        goToEditCopyButton.setBackground(Color.WHITE);
+        goToEditCopyButton.setFocusPainted(false);
+        goToEditCopyButton.setPreferredSize(new Dimension(300,30));
+        goToEditCopyButton.addActionListener(cHandler);
+        goToEditCopyButton.setActionCommand("editCopy");
+        adminPanel.add(goToEditCopyButton);
 
         //Knapp add/edit object
         JButton goToEditLoanReservationButton = new JButton("Add/Edit/Remove Loan");
@@ -410,7 +421,7 @@ public class GUI {
         registerUserPanel.add(emailTextField);
 
         //user personnummer label and textfield
-        JLabel personnummerLabel = new JLabel("Personal number: ");
+        JLabel personnummerLabel = new JLabel("Personal number(xxxxxxxxxx): ");
         personnummerLabel.setForeground(Color.black);
         personnummerLabel.setFont(normalFont);
         registerUserPanel.add(personnummerLabel);
@@ -502,7 +513,7 @@ public class GUI {
                     else{
                         editUser = "do not edit";
                     }
-                _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getName(), usernameTextField.getText(), passwordTextField.getText(), removeUser, editUser);
+                _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getSelectedItem().toString(), usernameTextField.getText(), passwordTextField.getText(), removeUser, editUser);
 
                 }
             });
@@ -516,10 +527,8 @@ public class GUI {
         cancelRegisterUserButton.addActionListener(cHandler);
         cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
         registerUserPanel.add(cancelRegisterUserButton);
-
-
-
     }
+
 
     public void createAddBookPanel(NavigationChoiceHandler cHandler, JPanel panel) {
 
@@ -659,8 +668,125 @@ public class GUI {
         cancelRegisterUserButton.addActionListener(cHandler);
         cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
         addBookPanel.add(cancelRegisterUserButton);
+    }
+
+    public void createAddItemCopyPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+
+        //add panel
+        addItemCopyPanel = new JPanel();
+        addItemCopyPanel.setLayout(new GridLayout(15, 2, 10,5));
+        panel.add(addItemCopyPanel);
+
+        //header Add or Edit
+        JLabel header1Label = new JLabel("Add/Edit/Delete");
+        header1Label.setForeground(Color.black);
+        header1Label.setFont(normalFont);
+        addItemCopyPanel.add(header1Label);
+        JLabel header2Label = new JLabel("Copy of Books/Articles..");
+        header2Label.setForeground(Color.black);
+        header2Label.setFont(normalFont);
+        addItemCopyPanel.add(header2Label);
+
+        //barcode
+        JLabel barcodeLabel = new JLabel("Barcode: ");
+        barcodeLabel.setForeground(Color.black);
+        barcodeLabel.setFont(normalFont);
+        addItemCopyPanel.add(barcodeLabel);
+        JTextField barcodeTextField = new JTextField();
+        barcodeTextField.setPreferredSize(new Dimension(400,30));
+        barcodeTextField.setBackground(Color.lightGray);
+        addItemCopyPanel.add(barcodeTextField);
+
+        //physical location
+        JLabel physicalLocationLabel = new JLabel("Physical location: ");
+        physicalLocationLabel.setForeground(Color.black);
+        physicalLocationLabel.setFont(normalFont);
+        addItemCopyPanel.add(physicalLocationLabel);
+        JTextField physicalLocationTextField = new JTextField();
+        physicalLocationTextField.setPreferredSize(new Dimension(400,30));
+        physicalLocationTextField.setBackground(Color.lightGray);
+        addItemCopyPanel.add(physicalLocationTextField);
+
+        //ISBN
+        JLabel isbnLabel = new JLabel("ISBN(if applicable): ");
+        isbnLabel.setForeground(Color.black);
+        isbnLabel.setFont(normalFont);
+        addItemCopyPanel.add(isbnLabel);
+        JTextField isbnTextField = new JTextField();
+        isbnTextField.setPreferredSize(new Dimension(400,30));
+        isbnTextField.setBackground(Color.lightGray);
+        addItemCopyPanel.add(isbnTextField);
+
+        //movieID
+        JLabel MovieIdLabel = new JLabel("Movie ID(if applicable): ");
+        MovieIdLabel.setForeground(Color.black);
+        MovieIdLabel.setFont(normalFont);
+        addItemCopyPanel.add(MovieIdLabel);
+        JTextField movieIdTextField = new JTextField();
+        movieIdTextField.setPreferredSize(new Dimension(400,30));
+        movieIdTextField.setBackground(Color.lightGray);
+        addItemCopyPanel.add(movieIdTextField);
+
+        //status label and dropdown menu
+        JLabel statusLabel = new JLabel("Status: ");
+        statusLabel.setForeground(Color.black);
+        statusLabel.setFont(normalFont);
+        addItemCopyPanel.add(statusLabel);
+        String[] statusOptions = {"Loanable", "Not Loanable"};
+        JComboBox<String> statusComboBox = new JComboBox<>(statusOptions);
+        addItemCopyPanel.add(statusComboBox);
+
+        //remove item check box
+        JLabel removeItemCopyLabel = new JLabel("CHECK BOX TO REMOVE ITEM");
+        removeItemCopyLabel.setForeground(Color.black);
+        removeItemCopyLabel.setFont(normalFont);
+        addItemCopyPanel.add(removeItemCopyLabel);
+        JCheckBox removeItemCheckBox = new JCheckBox();
+        addItemCopyPanel.add(removeItemCheckBox);
+
+        //register button
+        JButton registerButton = new JButton("Register");
+        registerButton.setFont(normalFont);
+        registerButton.setBackground(Color.WHITE);
+        registerButton.setPreferredSize(new Dimension(150,30));
+        registerButton.setFocusPainted(false);
+        registerButton.addActionListener(cHandler);
+        registerButton.setActionCommand("registerItemCopy");
+        addItemCopyPanel.add(registerButton);
+        registerButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent event){
+
+                String removeItem = "do not remove";
+
+                if(removeItemCheckBox.isSelected()){
+                    removeItem = "remove";
+                }
+
+                if(movieIdTextField.getText().isEmpty()) {
+                    _bookService.updateBookCopy(barcodeTextField.getText(), physicalLocationTextField.getText(), isbnTextField.getText(), statusComboBox.getSelectedItem().toString(), removeItem);
+                }
+                else if(isbnTextField.getText().isEmpty()){
+                    _bookService.updateDvdCopy(barcodeTextField.getText(), physicalLocationTextField.getText(), movieIdTextField.getText(), statusComboBox.getSelectedItem().toString(), removeItem);
+                }
+                else{
+                    //prompt please add either isbn or movie id
+                }
+            }
+        });
+
+        //cancel register user button
+        JButton cancelRegisterItemButton = new JButton("Cancel");
+        cancelRegisterItemButton.setFont(normalFont);
+        cancelRegisterItemButton.setBackground(Color.WHITE);
+        cancelRegisterItemButton.setPreferredSize(new Dimension(150,30));
+        cancelRegisterItemButton.setFocusPainted(false);
+        cancelRegisterItemButton.addActionListener(cHandler);
+        cancelRegisterItemButton.setActionCommand("cancelRegisterUser");
+        addItemCopyPanel.add(cancelRegisterItemButton);
 
     }
+
 
     public void createAddDvdPanel(NavigationChoiceHandler cHandler, JPanel panel) {
 

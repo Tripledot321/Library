@@ -5,6 +5,7 @@ import javax.swing.*;
 public class UserService {
 
     private DatabaseConn database;
+    private boolean isLoggedIn;
     private boolean isAdminLoggedIn;
     public UserService(DatabaseConn database){
         this.database = database;
@@ -12,8 +13,10 @@ public class UserService {
 
     public boolean isAuthenticated(){
 
+
         //return true if user details are available, return false otherwise
-        return isAdminLoggedIn;
+        //här började jag ändra
+        return isLoggedIn;
     }
 
     public boolean isUserAdmin(){
@@ -28,11 +31,19 @@ public class UserService {
         System.out.println("User service was requested to sign in username: '"+username+"' and user password: '"+password+"'");
 
         boolean result = database.validateUser(username, password);
+        boolean isAdmin = false;
+
+        if(result == true){
+            isAdmin = database.getAccountType(username);
+        }
 
         //If result is false return false
         //If result is true then get user details
         //save user details in this class
-        isAdminLoggedIn = result;
+        isLoggedIn = result;
+        isAdminLoggedIn = isAdmin;
+
+        //isAdminLoggedIn = result;
             //
             if(result == true){
                 JFrame f = new JFrame();

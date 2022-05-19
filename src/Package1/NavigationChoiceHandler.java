@@ -32,6 +32,7 @@ public class NavigationChoiceHandler implements ActionListener {
             case "registerDvd": visibilityManager.registerDvdScreen(); break;
             case "editLoanReservation": visibilityManager.editLoanScreen(); break;
             case "editReservation": visibilityManager.editReservationScreen(); break;
+            case "editCopy": visibilityManager.editCopyScreen(); break;
 
         }
 
