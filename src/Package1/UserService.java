@@ -71,14 +71,30 @@ public class UserService {
         System.out.println("User service was requested to edit a loan for a user");
 
         if(removeLoanReservation.equalsIgnoreCase("remove")){
-            database.removeLoanReservation(barcode);
+            database.removeLoan(barcode);
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Loan/Reservation for book: "+barcode+" was removed for: "+personnummer);
+            JOptionPane.showMessageDialog(f, "Loan for book: "+barcode+" was removed for: "+personnummer);
         }
         else {
             database.addLoanReservation(personnummer, barcode);
             JFrame f2 = new JFrame();
-            JOptionPane.showMessageDialog(f2, "Loan/Reservation for book: "+barcode+" was added for: "+personnummer);
+            JOptionPane.showMessageDialog(f2, "Loan for book: "+barcode+" was added for: "+personnummer);
+        }
+
+    }
+
+    public void editReservationUser(String personnummer, String barcode, String removeReservation){
+        System.out.println("User service was requested to edit a loan for a user");
+
+        if(removeReservation.equalsIgnoreCase("remove")){
+            database.removeReservation(barcode, personnummer);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f, "Reservation for book: "+barcode+" was removed for: "+personnummer);
+        }
+        else {
+            database.addReservation(personnummer, barcode);
+            JFrame f2 = new JFrame();
+            JOptionPane.showMessageDialog(f2, "Reservation for book: "+barcode+" was added for: "+personnummer);
         }
 
     }

@@ -38,7 +38,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void loginScreen(){
@@ -49,7 +50,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void myAccountScreen(){
@@ -60,7 +62,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void adminScreen(){
@@ -71,7 +74,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void registerUserScreen(){
@@ -82,7 +86,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(true);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void registerBookScreen(){
@@ -93,7 +98,8 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(true);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
     public void registerDvdScreen(){
@@ -104,10 +110,11 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(true);
-        gui.editLoanReservationPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(false);
     }
 
-    public void editLoanReservationScreen(){
+    public void editLoanScreen(){
         gui.searchBooksPanel.setVisible(false);
         gui.loginPanel.setVisible(false);
         gui.myAccountPanel.setVisible(false);
@@ -115,7 +122,20 @@ public class VisibilityManager {
         gui.registerUserPanel.setVisible(false);
         gui.addBookPanel.setVisible(false);
         gui.addDvdPanel.setVisible(false);
-        gui.editLoanReservationPanel.setVisible(true);
+        gui.editLoanPanel.setVisible(true);
+        gui.editReservationPanel.setVisible(false);
+    }
+
+    public void editReservationScreen(){
+        gui.searchBooksPanel.setVisible(false);
+        gui.loginPanel.setVisible(false);
+        gui.myAccountPanel.setVisible(false);
+        gui.adminPanel.setVisible(false);
+        gui.registerUserPanel.setVisible(false);
+        gui.addBookPanel.setVisible(false);
+        gui.addDvdPanel.setVisible(false);
+        gui.editLoanPanel.setVisible(false);
+        gui.editReservationPanel.setVisible(true);
     }
 
 

@@ -4,14 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.List;
 
 //min kommentar
 public class GUI {
 
     JFrame frame;
-    JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanReservationPanel;
+    JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanPanel, editReservationPanel;
     JButton goToMyAccountButton, goToAdminButton;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font headerFont = new Font("SERIF", Font.BOLD, 26);
@@ -74,7 +73,8 @@ public class GUI {
         createRegisterUserPanel(cHandler, mainPanel);
         createAddBookPanel(cHandler, mainPanel);
         createAddDvdPanel(cHandler,mainPanel);
-        createEditLoanReservationPanel(cHandler, mainPanel);
+        createEditLoanPanel(cHandler, mainPanel);
+        createEditReservationPanel(cHandler, mainPanel);
 
         frame.pack();
 
@@ -341,7 +341,7 @@ public class GUI {
         adminPanel.add(goToRegisterDvdButton);
 
         //Knapp add/edit object
-        JButton goToEditLoanReservationButton = new JButton("Add/Edit/Remove Loan/Reservation");
+        JButton goToEditLoanReservationButton = new JButton("Add/Edit/Remove Loan");
         goToEditLoanReservationButton.setFont(normalFont);
         goToEditLoanReservationButton.setBackground(Color.WHITE);
         goToEditLoanReservationButton.setFocusPainted(false);
@@ -349,6 +349,17 @@ public class GUI {
         goToEditLoanReservationButton.addActionListener(cHandler);
         goToEditLoanReservationButton.setActionCommand("editLoanReservation");
         adminPanel.add(goToEditLoanReservationButton);
+
+        //knapp edit reservation
+        JButton goToEditReservationButton = new JButton("Add/Edit/Remove Reservation");
+        goToEditReservationButton.setFont(normalFont);
+        goToEditReservationButton.setBackground(Color.WHITE);
+        goToEditReservationButton.setFocusPainted(false);
+        goToEditReservationButton.setPreferredSize(new Dimension(300,30));
+        goToEditReservationButton.addActionListener(cHandler);
+        goToEditReservationButton.setActionCommand("editReservation");
+        adminPanel.add(goToEditReservationButton);
+
     }
 
     public void createRegisterUserPanel(NavigationChoiceHandler cHandler, JPanel panel) {
@@ -495,6 +506,19 @@ public class GUI {
 
                 }
             });
+
+        //cancel register user button
+        JButton cancelRegisterUserButton = new JButton("Cancel");
+        cancelRegisterUserButton.setFont(normalFont);
+        cancelRegisterUserButton.setBackground(Color.WHITE);
+        cancelRegisterUserButton.setPreferredSize(new Dimension(150,30));
+        cancelRegisterUserButton.setFocusPainted(false);
+        cancelRegisterUserButton.addActionListener(cHandler);
+        cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
+        registerUserPanel.add(cancelRegisterUserButton);
+
+
+
     }
 
     public void createAddBookPanel(NavigationChoiceHandler cHandler, JPanel panel) {
@@ -785,50 +809,50 @@ public class GUI {
     }
 
 
-    public void createEditLoanReservationPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+    public void createEditLoanPanel(NavigationChoiceHandler cHandler, JPanel panel) {
 
         //username text field
-        editLoanReservationPanel = new JPanel();
-        editLoanReservationPanel.setLayout(new GridLayout(15, 2, 10,5));
-        panel.add(editLoanReservationPanel);
+        editLoanPanel = new JPanel();
+        editLoanPanel.setLayout(new GridLayout(15, 2, 10,5));
+        panel.add(editLoanPanel);
 
         //header Add or Edit user
         JLabel header1Label = new JLabel("Add/Delete");
         header1Label.setForeground(Color.black);
         header1Label.setFont(normalFont);
-        editLoanReservationPanel.add(header1Label);
-        JLabel header2Label = new JLabel("Loans/Reservations");
+        editLoanPanel.add(header1Label);
+        JLabel header2Label = new JLabel("Loans");
         header2Label.setForeground(Color.black);
         header2Label.setFont(normalFont);
-        editLoanReservationPanel.add(header2Label);
+        editLoanPanel.add(header2Label);
 
         //Barcode
         JLabel barcodeLabel = new JLabel("Item barcode: ");
         barcodeLabel.setForeground(Color.black);
         barcodeLabel.setFont(normalFont);
-        editLoanReservationPanel.add(barcodeLabel);
+        editLoanPanel.add(barcodeLabel);
         JTextField barcodeTextField = new JTextField();
         barcodeTextField.setPreferredSize(new Dimension(400,30));
         barcodeTextField.setBackground(Color.lightGray);
-        editLoanReservationPanel.add(barcodeTextField);
+        editLoanPanel.add(barcodeTextField);
 
         //UserID
         JLabel userPersonnummerLabel = new JLabel("User personnummer: ");
         userPersonnummerLabel.setForeground(Color.black);
         userPersonnummerLabel.setFont(normalFont);
-        editLoanReservationPanel.add(userPersonnummerLabel);
+        editLoanPanel.add(userPersonnummerLabel);
         JTextField userPersonnummerTextField = new JTextField();
         userPersonnummerTextField.setPreferredSize(new Dimension(400,30));
         userPersonnummerTextField.setBackground(Color.lightGray);
-        editLoanReservationPanel.add(userPersonnummerTextField);
+        editLoanPanel.add(userPersonnummerTextField);
 
         //remove loan/reservation check box
-        JLabel removeLoanReservationLabel = new JLabel("CHECK BOX TO REMOVE LOAN/RESERVATION");
+        JLabel removeLoanReservationLabel = new JLabel("CHECK BOX TO REMOVE LOAN");
         removeLoanReservationLabel.setForeground(Color.black);
         removeLoanReservationLabel.setFont(normalFont);
-        editLoanReservationPanel.add(removeLoanReservationLabel);
+        editLoanPanel.add(removeLoanReservationLabel);
         JCheckBox removeLoanReservationCheckBox = new JCheckBox();
-        editLoanReservationPanel.add(removeLoanReservationCheckBox);
+        editLoanPanel.add(removeLoanReservationCheckBox);
 
         //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE LOAN/RESERVATION
 
@@ -840,7 +864,7 @@ public class GUI {
         registerLoanButton.setFocusPainted(false);
         registerLoanButton.addActionListener(cHandler);
         registerLoanButton.setActionCommand("registerLoanReservation");
-        editLoanReservationPanel.add(registerLoanButton);
+        editLoanPanel.add(registerLoanButton);
         registerLoanButton.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent event){
@@ -856,6 +880,89 @@ public class GUI {
             }
         });
 
+        //cancel register user button
+        JButton cancelRegisterLoanButton = new JButton("Cancel");
+        cancelRegisterLoanButton.setFont(normalFont);
+        cancelRegisterLoanButton.setBackground(Color.WHITE);
+        cancelRegisterLoanButton.setPreferredSize(new Dimension(150,30));
+        cancelRegisterLoanButton.setFocusPainted(false);
+        cancelRegisterLoanButton.addActionListener(cHandler);
+        cancelRegisterLoanButton.setActionCommand("cancelRegisterUser");
+        editLoanPanel.add(cancelRegisterLoanButton);
+    }
+
+
+    public void createEditReservationPanel(NavigationChoiceHandler cHandler, JPanel panel) {
+
+        //username text field
+        editReservationPanel = new JPanel();
+        editReservationPanel.setLayout(new GridLayout(15, 2, 10,5));
+        panel.add(editReservationPanel);
+
+        //header Add or Edit user
+        JLabel header1Label = new JLabel("Add/Delete");
+        header1Label.setForeground(Color.black);
+        header1Label.setFont(normalFont);
+        editReservationPanel.add(header1Label);
+        JLabel header2Label = new JLabel("Reservations");
+        header2Label.setForeground(Color.black);
+        header2Label.setFont(normalFont);
+        editReservationPanel.add(header2Label);
+
+        //Barcode
+        JLabel barcodeLabel = new JLabel("Item barcode: ");
+        barcodeLabel.setForeground(Color.black);
+        barcodeLabel.setFont(normalFont);
+        editReservationPanel.add(barcodeLabel);
+        JTextField barcodeTextField = new JTextField();
+        barcodeTextField.setPreferredSize(new Dimension(400,30));
+        barcodeTextField.setBackground(Color.lightGray);
+        editReservationPanel.add(barcodeTextField);
+
+        //UserID
+        JLabel userPersonnummerLabel = new JLabel("User personnummer: ");
+        userPersonnummerLabel.setForeground(Color.black);
+        userPersonnummerLabel.setFont(normalFont);
+        editReservationPanel.add(userPersonnummerLabel);
+        JTextField userPersonnummerTextField = new JTextField();
+        userPersonnummerTextField.setPreferredSize(new Dimension(400,30));
+        userPersonnummerTextField.setBackground(Color.lightGray);
+        editReservationPanel.add(userPersonnummerTextField);
+
+        //remove loan/reservation check box
+        JLabel removeReservationLabel = new JLabel("CHECK BOX TO REMOVE LOAN/RESERVATION");
+        removeReservationLabel.setForeground(Color.black);
+        removeReservationLabel.setFont(normalFont);
+        editReservationPanel.add(removeReservationLabel);
+        JCheckBox removeReservationCheckBox = new JCheckBox();
+        editReservationPanel.add(removeReservationCheckBox);
+
+        //SHOULD PROMPT ARE YOU SURE YOU WISH TO REMOVE LOAN/RESERVATION
+
+        //register user button
+        JButton registerReservationButton = new JButton("Register");
+        registerReservationButton.setFont(normalFont);
+        registerReservationButton.setBackground(Color.WHITE);
+        registerReservationButton.setPreferredSize(new Dimension(150,30));
+        registerReservationButton.setFocusPainted(false);
+        registerReservationButton.addActionListener(cHandler);
+        registerReservationButton.setActionCommand("registerLoanReservation");
+        editReservationPanel.add(registerReservationButton);
+        registerReservationButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent event){
+
+                String removeReservation = "do not remove";
+
+                if(removeReservationCheckBox.isSelected()){
+                    removeReservation = "remove";
+                }
+
+                _userService.editReservationUser(userPersonnummerTextField.getText(), barcodeTextField.getText(), removeReservation);
+
+            }
+        });
+
 
 
         //cancel register user button
@@ -866,7 +973,7 @@ public class GUI {
         cancelRegisterUserButton.setFocusPainted(false);
         cancelRegisterUserButton.addActionListener(cHandler);
         cancelRegisterUserButton.setActionCommand("cancelRegisterUser");
-        editLoanReservationPanel.add(cancelRegisterUserButton);
+        editReservationPanel.add(cancelRegisterUserButton);
 
     }
 

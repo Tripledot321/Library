@@ -1,6 +1,5 @@
 package Package1;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,7 +30,8 @@ public class NavigationChoiceHandler implements ActionListener {
             case "registerUser": visibilityManager.registerUserScreen(); break;
             case "registerBook": visibilityManager.registerBookScreen(); break;
             case "registerDvd": visibilityManager.registerDvdScreen(); break;
-            case "editLoanReservation": visibilityManager.editLoanReservationScreen(); break;
+            case "editLoanReservation": visibilityManager.editLoanScreen(); break;
+            case "editReservation": visibilityManager.editReservationScreen(); break;
 
         }
 

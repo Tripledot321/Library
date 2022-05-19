@@ -374,13 +374,13 @@ public class DatabaseConn {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-
-
-
     }
 
-    public void removeLoanReservation(String barcode) {
+    public void removeLoan(String barcode) {
+
+        //Denna metod kanske egentligen borde uppdatera fältet Status, snarare än att ta bort lånet
+        //men vi tänker att vi i databasen eventuellt kommer ha en tabell med 'lånhistorik' dit ett gammalt
+        //lån flyttas
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date returnDate = new Date();
@@ -399,6 +399,103 @@ public class DatabaseConn {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public void removeReservation(String barcode, String personnummer) {
+
+        //Denna metod kanske egentligen borde uppdatera fältet Status, snarare än att ta bort reservationen
+        //men vi tänker att vi i databasen eventuellt kommer ha en tabell med 'reservationshistorik' dit en gammal
+        //reservation flyttas
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date returnDate = new Date();
+        String returnDateString = dateFormat.format(returnDate);
+        System.out.println("Return date: "+dateFormat.format(returnDate));
+        String userIdFromDb = null;
+
+        //hämta ut userID baserat på personnummer
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+
+            String strUserId = "SELECT UserID FROM user WHERE ssn = '"+personnummer+"'";
+
+            ResultSet rset = stmt.executeQuery(strUserId);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                userIdFromDb = rset.getString("UserID");
+
+                ++rowCount;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strDelete = "DELETE FROM reservation WHERE Barcode = '"+barcode+"' AND UserID = '"+userIdFromDb+"'";
+
+            int rset = stmt.executeUpdate(strDelete);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addReservation(String personnummer, String barcode) {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date todayDate = new Date();
+        String todayDateString = dateFormat.format(todayDate);
+        System.out.println("Start date: "+dateFormat.format(todayDate));
+
+        String userIdFromDb = null;
+
+        try {
+
+            Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+
+            String strUserId = "SELECT UserID FROM user WHERE ssn = '"+personnummer+"'";
+
+            ResultSet rset = stmt.executeQuery(strUserId);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                userIdFromDb = rset.getString("UserID");
+
+                ++rowCount;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strInsert = "INSERT INTO reservation (Startdate, ResStatus, UserID, Barcode)" +
+                    "VALUES ('"+todayDateString+"', 'active', '"+userIdFromDb+"', '"+barcode+"')";
+
+            int rset = stmt.executeUpdate(strInsert);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
