@@ -28,6 +28,8 @@ public class GUI {
         this._userService = userService;
     }
 
+    //i denna ligger allt visuella komponenter
+
     public void createGUI(NavigationChoiceHandler cHandler) {
 
         JPanel headerPanel, mainPanel;
@@ -177,8 +179,6 @@ public class GUI {
             searchField.setBackground(Color.lightGray);
             searchBooksPanel.add(searchField, BorderLayout.CENTER);
 
-
-
             JButton searchButton = new JButton("Search");
             searchButton.setBackground(Color.black);
             searchButton.setForeground(Color.white);
@@ -186,12 +186,13 @@ public class GUI {
             searchButton.setFocusPainted(false);
             searchBooksPanel.add(searchButton, BorderLayout.LINE_END);
 
-                //egen actionListner för denna knapp
+                //egen actionListener för denna knapp
             searchButton.addActionListener(new ActionListener(){
 
                 public void actionPerformed(ActionEvent event){
 
                     var bookResult = _bookService.findBooks(searchField.getText());
+//                    var copiesOfResult =
                     String bookResultString = bookResult.toString();
 
                     JLabel bookResultsLabel = new JLabel();
@@ -283,6 +284,8 @@ public class GUI {
                 //refresha knapparna
                 event = new ActionEvent(this, event.getID(), "start");
                 cHandler.actionPerformed(event);
+                usernameField.setText("");
+                passwordField.setText("");
             }
         });
         loginPanel.add(loginButton);
@@ -315,43 +318,6 @@ public class GUI {
         myLoansLabel.setForeground(Color.black);
         myLoansLabel.setFont(headerFont);
         myAccountPanel.add(myLoansLabel);
-//
-//        var activeLoans = _bookService.findBooks(searchField.getText());
-//        String bookResultString = activeLoans.toString();
-//
-//        JLabel bookResultsLabel = new JLabel();
-//        JLabel noResults = new JLabel();
-//
-//        //searchbookspanel ska ha en annan panel i sig, och sen kan jag setvisible
-//        //gör detta searchBooksPanel.removeAll(); i resultatspanelen som ligger i searchbookspanel
-//        //en label som varierar beroende på resultatet
-//
-//        //fråga Tomas den blir crazy andra ggn när man söker och gör inte raderna nedan?
-//        noResults.setVisible(false);
-//        bookResultsLabel.setVisible(false);
-//        searchBooksPanel.remove(noResults);
-//        searchBooksPanel.remove(bookResultsLabel);
-//        frame.pack();
-//
-//        if(!bookResult.isEmpty()) {
-//            System.out.println("I found a result");
-//            bookResultsLabel = new JLabel(bookResultString);
-//            bookResultsLabel.setVisible(true);
-//            bookResultsLabel.setFont(smallFont);
-//            searchBooksPanel.add(bookResultsLabel, BorderLayout.PAGE_END);
-//            System.out.println(bookResult);
-//            frame.pack();
-//        }
-//        else{
-//            System.out.println("No search results found in DataBase when button was clicked");
-//            noResults = new JLabel("No search results found");
-//            noResults.setVisible(true);
-//            noResults.setForeground(Color.black);
-//            noResults.setFont(normalFont);
-//            searchBooksPanel.add(noResults, BorderLayout.PAGE_END);
-//            frame.pack();
-//        }
-
     }
 
     public void createAdminPanel(NavigationChoiceHandler cHandler, JPanel panel){
@@ -568,7 +534,13 @@ public class GUI {
                         editUser = "do not edit";
                     }
                 _userService.updateUser(firstNameTextField.getText(), lastnameTextField.getText(), emailTextField.getText(), personnummerTextField.getText(), phonenumberTextField.getText(), accountTypeComboBox.getSelectedItem().toString(), usernameTextField.getText(), passwordTextField.getText(), removeUser, editUser);
-
+                firstNameTextField.setText("");
+                lastnameTextField.setText("");
+                emailTextField.setText("");
+                personnummerTextField.setText("");
+                phonenumberTextField.setText("");
+                usernameTextField.setText("");
+                passwordTextField.setText("");
                 }
             });
 
@@ -709,7 +681,12 @@ public class GUI {
 
 
                 _bookService.updateBook(isbnTextField.getText(), publisherTextField.getText(), categoryTextField.getText(), titleTextField.getText(), yopTextField.getText(), classificationTextField.getText(), removeBook, editBook);
-
+                isbnTextField.setText("");
+                publisherTextField.setText("");
+                categoryTextField.setText("");
+                titleTextField.setText("");
+                yopTextField.setText("");
+                classificationTextField.setText("");
             }
         });
 
@@ -826,6 +803,10 @@ public class GUI {
                 else{
                     //prompt please add either isbn or movie id
                 }
+                barcodeTextField.setText("");
+                physicalLocationTextField.setText("");
+                isbnTextField.setText("");
+                movieIdTextField.setText("");
             }
         });
 
@@ -972,7 +953,13 @@ public class GUI {
 
 
                 _bookService.updateDvd(directorTextField.getText(), producerTextField.getText(), categoryTextField.getText(), classificationTextField.getText(), yopTextField.getText(), titleTextField.getText(), countryTextField.getText(), removeDvd, editDvd);
-
+                directorTextField.setText("");
+                producerTextField.setText("");
+                categoryTextField.setText("");
+                classificationTextField.setText("");
+                yopTextField.setText("");
+                titleTextField.setText("");
+                countryTextField.setText("");
             }
         });
 
@@ -1056,6 +1043,8 @@ public class GUI {
                 }
 
                 _userService.editLoanUser(userPersonnummerTextField.getText(), barcodeTextField.getText(), removeLoan);
+                userPersonnummerTextField.setText("");
+                barcodeTextField.setText("");
 
             }
         });
@@ -1139,7 +1128,8 @@ public class GUI {
                 }
 
                 _userService.editReservationUser(userPersonnummerTextField.getText(), barcodeTextField.getText(), removeReservation);
-
+                userPersonnummerTextField.setText("");
+                barcodeTextField.setText("");
             }
         });
 

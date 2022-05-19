@@ -7,6 +7,8 @@ public class NavigationChoiceHandler implements ActionListener {
 
     private VisibilityManager visibilityManager;
 
+    //i denna reglerar vi knapparna som inte har med något annat än navigering att göra
+
     public void setVisibilityManager(VisibilityManager vm) {
         visibilityManager = vm;
     }

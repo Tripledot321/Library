@@ -22,6 +22,8 @@ public class DatabaseConn {
         this.password = password;
     }
 
+    //i denna ligger kontroller vi gör mot databasen
+
     private Connection getConnection(){
         try {
 
@@ -92,6 +94,40 @@ public class DatabaseConn {
 
         return searchResults;
     }
+
+//    public List<String> selectCopiesOfItem(String searchParameter) {
+//
+//        List<String> searchResults = new ArrayList<>();
+//
+//        try {
+//            Connection conn = getConnection();
+//            Statement stmt = conn.createStatement();
+//
+//            String strSelect = "SELECT * from copy WHERE ISBN = '"+searchParameter+"' OR WHERE MovieID = '"+searchParameter+"'";
+//
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            int rowCount = 0;
+//            String isbnCopies = null;
+//            String movieIdCopies = null;
+//
+//
+//
+//            while (rset.next()) {
+//
+//                isbnCopies = rset.getString("ISBN");
+//                movieIdCopies = rset.getString("MovieID");
+//
+//                searchResults.add(allInformation);
+//                ++rowCount;
+//            }
+//
+//
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return searchResults;
+//    }
 
     public  List<String> selectBooks(String searchParameter) {
 

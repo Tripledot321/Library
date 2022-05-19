@@ -2,6 +2,8 @@ package Package1;
 
 public class User {
 
+    //här har vi en basic användarklass
+
     private boolean _validatedUser;
     private String _accountType;
 

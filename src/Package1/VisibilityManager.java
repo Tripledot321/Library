@@ -6,6 +6,8 @@ public class VisibilityManager {
     GUI gui;
     private UserService _userService;
 
+    //här styr vi de respektive "screensen" eller det man ser som användare
+
     public VisibilityManager(GUI userInterface, UserService userService) {
         gui = userInterface;
         _userService = userService;

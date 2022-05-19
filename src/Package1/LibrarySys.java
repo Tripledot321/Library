@@ -6,6 +6,8 @@ public class LibrarySys {
     GUI gui;
     VisibilityManager vm;
 
+    // i denna startar vi upp själva systemet (även en instans av systemet)
+
     public static void main(String[] args){
 
         var librarySystem = new LibrarySys();

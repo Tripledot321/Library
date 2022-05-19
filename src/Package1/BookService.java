@@ -21,6 +21,24 @@ public class BookService {
 
     }
 
+//    public List<String> findCopiesOfItem(String searchTerm){
+//
+//        System.out.println("Search service was requested to find copies of book with search term '"+searchTerm+"'");
+//
+//        database.selectCopiesOfItem(searchTerm);
+//        database.getBooks(searchTerm);
+//
+//        List<String> searchResults = database.selectBooks(searchTerm);
+//
+//        return searchResults;
+//
+//    }
+//
+
+
+    //i denna har vi lagt saker som har att göra med items
+
+
     public void updateBook(String isbn, String bookPublisher, String bookCategory, String title, String yearOfPublication, String classification, String removeBook, String editBook){
 
         System.out.println("Book update service was requested");

@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class UserService {
 
+    //här styr vi saker som har med användare att göra
+
     private DatabaseConn database;
     private boolean isLoggedIn;
     private boolean isAdminLoggedIn;
