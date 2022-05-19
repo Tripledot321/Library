@@ -12,17 +12,16 @@ public class UserService {
     }
 
     public boolean isAuthenticated(){
-
-
-        //return true if user details are available, return false otherwise
-        //här började jag ändra
         return isLoggedIn;
     }
 
     public boolean isUserAdmin(){
-
-        //return true if user is logged in, and has admin privilege
         return isAdminLoggedIn;
+    }
+
+    public void signOutUser (){
+        isLoggedIn = false;
+        isAdminLoggedIn = false;
     }
 
 
@@ -84,12 +83,12 @@ public class UserService {
         if(removeLoanReservation.equalsIgnoreCase("remove")){
             database.removeLoan(barcode);
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f, "Loan for book: "+barcode+" was removed for: "+personnummer);
+            JOptionPane.showMessageDialog(f, "Loan of book: "+barcode+" was removed for: "+personnummer);
         }
         else {
-            database.addLoanReservation(personnummer, barcode);
+            database.addLoan(personnummer, barcode);
             JFrame f2 = new JFrame();
-            JOptionPane.showMessageDialog(f2, "Loan for book: "+barcode+" was added for: "+personnummer);
+            JOptionPane.showMessageDialog(f2, "Loan of book: "+barcode+" was added for: "+personnummer);
         }
 
     }

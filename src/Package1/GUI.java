@@ -11,7 +11,7 @@ public class GUI {
 
     JFrame frame;
     JPanel searchBooksPanel, loginPanel, myAccountPanel, registerUserPanel, adminPanel, addBookPanel, addDvdPanel, editLoanPanel, editReservationPanel, addItemCopyPanel;
-    JButton goToMyAccountButton, goToAdminButton;
+    JButton goToMyAccountButton, goToAdminButton, goToLogoutButton, goToLoginButton;
     Font bigFont = new Font("Times New Roman", Font.PLAIN, 90);
     Font headerFont = new Font("SERIF", Font.BOLD, 26);
     Font normalFont = new Font("SERIF", Font.PLAIN, 26);
@@ -93,7 +93,7 @@ public class GUI {
             headerPanel.add(titleNameLabel);
 
             //navigate to login page button
-            JButton goToLoginButton = new JButton("Login");
+            goToLoginButton = new JButton("Login");
             goToLoginButton.setFont(normalFont);
             goToLoginButton.setBackground(Color.WHITE);
             goToLoginButton.setFocusPainted(false);
@@ -120,6 +120,26 @@ public class GUI {
             goToMyAccountButton.setActionCommand("myAccount");
             headerPanel.add(goToMyAccountButton);
 
+            //log out button for user who is signed in
+            goToLogoutButton = new JButton("Log Out");
+            goToLogoutButton.setFont(normalFont);
+            goToLogoutButton.setBackground(Color.WHITE);
+            goToLogoutButton.setFocusPainted(false);
+            goToLogoutButton.setVisible(false);
+            goToLogoutButton.addActionListener(cHandler);
+            goToLogoutButton.addActionListener(new ActionListener(){
+
+                public void actionPerformed(ActionEvent event){
+
+                    _userService.signOutUser();
+                    event = new ActionEvent(this, event.getID(), "start");
+                    cHandler.actionPerformed(event);
+                    //cHandler.actionPerformed(event);
+
+                }
+            });
+            headerPanel.add(goToLogoutButton);
+
             //navigate to my admin page button
             goToAdminButton = new JButton("Admin");
             goToAdminButton.setFont(normalFont);
@@ -129,9 +149,6 @@ public class GUI {
             goToAdminButton.addActionListener(cHandler);
             goToAdminButton.setActionCommand("admin");
             headerPanel.add(goToAdminButton);
-
-
-
 
     }
 
@@ -264,6 +281,7 @@ public class GUI {
             public void actionPerformed(ActionEvent event){
                 _userService.signInUser(usernameField.getText(), new String(passwordField.getPassword()));
                 //refresha knapparna
+                event = new ActionEvent(this, event.getID(), "start");
                 cHandler.actionPerformed(event);
             }
         });
@@ -297,6 +315,42 @@ public class GUI {
         myLoansLabel.setForeground(Color.black);
         myLoansLabel.setFont(headerFont);
         myAccountPanel.add(myLoansLabel);
+//
+//        var activeLoans = _bookService.findBooks(searchField.getText());
+//        String bookResultString = activeLoans.toString();
+//
+//        JLabel bookResultsLabel = new JLabel();
+//        JLabel noResults = new JLabel();
+//
+//        //searchbookspanel ska ha en annan panel i sig, och sen kan jag setvisible
+//        //gör detta searchBooksPanel.removeAll(); i resultatspanelen som ligger i searchbookspanel
+//        //en label som varierar beroende på resultatet
+//
+//        //fråga Tomas den blir crazy andra ggn när man söker och gör inte raderna nedan?
+//        noResults.setVisible(false);
+//        bookResultsLabel.setVisible(false);
+//        searchBooksPanel.remove(noResults);
+//        searchBooksPanel.remove(bookResultsLabel);
+//        frame.pack();
+//
+//        if(!bookResult.isEmpty()) {
+//            System.out.println("I found a result");
+//            bookResultsLabel = new JLabel(bookResultString);
+//            bookResultsLabel.setVisible(true);
+//            bookResultsLabel.setFont(smallFont);
+//            searchBooksPanel.add(bookResultsLabel, BorderLayout.PAGE_END);
+//            System.out.println(bookResult);
+//            frame.pack();
+//        }
+//        else{
+//            System.out.println("No search results found in DataBase when button was clicked");
+//            noResults = new JLabel("No search results found");
+//            noResults.setVisible(true);
+//            noResults.setForeground(Color.black);
+//            noResults.setFont(normalFont);
+//            searchBooksPanel.add(noResults, BorderLayout.PAGE_END);
+//            frame.pack();
+//        }
 
     }
 

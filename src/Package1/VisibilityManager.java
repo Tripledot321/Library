@@ -15,16 +15,28 @@ public class VisibilityManager {
 
         if(_userService.isAuthenticated()){
             gui.goToMyAccountButton.setVisible(true);
+            gui.goToLoginButton.setVisible(false);
+            gui.goToLogoutButton.setVisible(true);
         }
         else{
             gui.goToMyAccountButton.setVisible(false);
+            //testar här
+            gui.goToLogoutButton.setVisible(false);
+
+            gui.goToLoginButton.setVisible(true);
         }
 
         if(_userService.isUserAdmin()){
             gui.goToAdminButton.setVisible(true);
+//            gui.goToLoginButton.setVisible(false);
+//            gui.goToLogoutButton.setVisible(true);
         }
         else{
             gui.goToAdminButton.setVisible(false);
+//            gui.goToLogoutButton.setVisible(false);
+//
+//            gui.goToLoginButton.setVisible(true);
+
         }
 
     }

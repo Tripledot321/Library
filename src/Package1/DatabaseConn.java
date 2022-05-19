@@ -317,7 +317,7 @@ public class DatabaseConn {
         }
     }
 
-    public void addLoanReservation(String personnummer, String barCode) {
+    public void addLoan(String personnummer, String barCode) {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date todayDate = new Date();

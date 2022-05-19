@@ -19,7 +19,10 @@ public class NavigationChoiceHandler implements ActionListener {
 
         switch(yourChoice) {
             case "start":
-            case "search": visibilityManager.searchResults(); break;
+            case "search":
+                //osäker på denna nedanför, ska ju i princip starta om systemet
+            case "logOut":
+                visibilityManager.searchResults(); break;
             case "login": visibilityManager.loginScreen(); break;
             case "myAccount": visibilityManager.myAccountScreen(); break;
             case "admin":
