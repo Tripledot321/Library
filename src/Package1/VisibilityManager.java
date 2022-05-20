@@ -6,13 +6,12 @@ public class VisibilityManager {
     GUI gui;
     private UserService _userService;
 
-    //här styr vi de respektive "screensen" eller det man ser som användare
-
     public VisibilityManager(GUI userInterface, UserService userService) {
         gui = userInterface;
         _userService = userService;
     }
 
+    //Kontrollerar ifall användaren är autentiserad, sen ifall den autentiserade användaren är admin
     public void showUserOptions(){
 
         if(_userService.isAuthenticated()){
@@ -22,26 +21,20 @@ public class VisibilityManager {
         }
         else{
             gui.goToMyAccountButton.setVisible(false);
-            //testar här
             gui.goToLogoutButton.setVisible(false);
-
             gui.goToLoginButton.setVisible(true);
         }
 
         if(_userService.isUserAdmin()){
             gui.goToAdminButton.setVisible(true);
-//            gui.goToLoginButton.setVisible(false);
-//            gui.goToLogoutButton.setVisible(true);
         }
         else{
             gui.goToAdminButton.setVisible(false);
-//            gui.goToLogoutButton.setVisible(false);
-//
-//            gui.goToLoginButton.setVisible(true);
-
         }
 
     }
+
+    //nedan följer alla "screens" i programmet genom att visa/inte visa de olika panelerna från GUI
 
     public void searchResults(){
         gui.searchBooksPanel.setVisible(true);

@@ -1126,7 +1126,6 @@ public class GUI {
                 if(removeReservationCheckBox.isSelected()){
                     removeReservation = "remove";
                 }
-
                 _userService.editReservationUser(userPersonnummerTextField.getText(), barcodeTextField.getText(), removeReservation);
                 userPersonnummerTextField.setText("");
                 barcodeTextField.setText("");

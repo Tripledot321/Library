@@ -59,11 +59,8 @@ public class DatabaseConn {
 
         try {
 
-
             Connection conn = getConnection();
-
             Statement stmt = conn.createStatement();
-
             String strSelect = "SELECT * from user WHERE FName='" + searchParameter + "'";
 
 
@@ -135,11 +132,8 @@ public class DatabaseConn {
 
         try {
 
-
             Connection conn = getConnection();
-
             Statement stmt = conn.createStatement();
-
             String strSelect = "SELECT * from books WHERE title='"+searchParameter+"'";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -176,7 +170,6 @@ public class DatabaseConn {
         try {
 
             Connection conn = getConnection();
-
             Statement stmt = conn.createStatement();
 
             String strSelect = "SELECT Password FROM user WHERE Username = '"+username+"'";

@@ -3,6 +3,7 @@ package Package1;
 import javax.swing.*;
 import java.util.List;
 
+
 public class BookService {
 
     private DatabaseConn database;
@@ -20,20 +21,6 @@ public class BookService {
         return searchResults;
 
     }
-
-//    public List<String> findCopiesOfItem(String searchTerm){
-//
-//        System.out.println("Search service was requested to find copies of book with search term '"+searchTerm+"'");
-//
-//        database.selectCopiesOfItem(searchTerm);
-//        database.getBooks(searchTerm);
-//
-//        List<String> searchResults = database.selectBooks(searchTerm);
-//
-//        return searchResults;
-//
-//    }
-//
 
 
     //i denna har vi lagt saker som har att göra med items
