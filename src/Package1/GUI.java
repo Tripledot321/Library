@@ -288,6 +288,7 @@ public class GUI {
                 }
                 //refresha knapparna
                 event = new ActionEvent(this, event.getID(), "start");
+                populateMyAccountPanel();
                 cHandler.actionPerformed(event);
                 usernameField.setText("");
                 passwordField.setText("");
@@ -312,8 +313,23 @@ public class GUI {
         myAccountPanel.setLayout(new BoxLayout(myAccountPanel, BoxLayout.Y_AXIS));
         panel.add(myAccountPanel);
 
+
+    }
+
+    public void populateMyAccountPanel() {
+
+        myAccountPanel.removeAll();
+
         //username label
-        JLabel usernameLabel = new JLabel("User:");
+        //Här använder vi polymorfism
+        var user = _userService.getUser();
+        var name = "";
+
+        if(user != null){
+            name = user.getName();
+        }
+
+        JLabel usernameLabel = new JLabel("User:"+name);
         usernameLabel.setForeground(Color.black);
         usernameLabel.setFont(headerFont);
         myAccountPanel.add(usernameLabel);

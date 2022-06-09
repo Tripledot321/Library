@@ -1,6 +1,6 @@
 package Package1;
 
-public class User implements IAdminUser {//IAdminUser extends IUser
+public class AdminUser implements IAdminUser {//IAdminUser extends IUser
 
 
     private boolean _validatedUser;
@@ -8,7 +8,7 @@ public class User implements IAdminUser {//IAdminUser extends IUser
     private String _firstName;
     private String _lastName;
 
-    public User(boolean validatedUser, String accountType, String firstName, String lastName){
+    public AdminUser(boolean validatedUser, String accountType, String firstName, String lastName){
         this._validatedUser = validatedUser;
         this._accountType = accountType;
         this._firstName = firstName;

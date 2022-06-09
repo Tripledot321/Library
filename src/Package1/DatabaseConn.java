@@ -665,4 +665,68 @@ public class DatabaseConn {
 
         return null;
     }
+
+    public String getFirstName(String username) throws SQLException {
+
+        List<String> searchResults = new ArrayList<>();
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strSelect = "SELECT Fname FROM user WHERE Username = '"+username+"'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                String firstName = rset.getString("Fname");
+                return firstName;
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //säkerställa att null aldrig händer, för en användartyp ska alltid finnas för en användare
+            throw ex;
+        }
+
+        return null;
+    }
+
+    public String getLastName(String username) throws SQLException {
+
+        List<String> searchResults = new ArrayList<>();
+
+        try {
+
+            Connection conn = getConnection();
+
+            Statement stmt = conn.createStatement();
+
+            String strSelect = "SELECT Lname FROM user WHERE Username = '"+username+"'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            int rowCount = 0;
+
+            while (rset.next()) {
+
+                String lastName = rset.getString("Lname");
+                return lastName;
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //säkerställa att null aldrig händer, för en användartyp ska alltid finnas för en användare
+            throw ex;
+        }
+
+        return null;
+    }
 }

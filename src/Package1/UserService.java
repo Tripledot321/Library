@@ -13,7 +13,7 @@ public class UserService {
     public UserService(DatabaseConn database){
         this.database = database;
     }
-    private User user;
+    private IAdminUser user;
 
     public boolean isAuthenticated(){
 
@@ -50,9 +50,13 @@ public class UserService {
             return;
         }
 
+        //vi skulle kunna skapa ett objekt och hämta med en query men tidsfaktorn...
         String userAccountType = database.getAccountType(username);
+        String firstName = database.getFirstName(username);
+        String lastName = database.getLastName(username);
 
-        user = new User(true, userAccountType);
+
+        user = new User(true, userAccountType, firstName, lastName);
 
         JFrame f = new JFrame();
         JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);
@@ -112,5 +116,9 @@ public class UserService {
             JOptionPane.showMessageDialog(f2, "Reservation for book: "+barcode+" was added for: "+personnummer);
         }
 
+    }
+
+    public IUser getUser() {
+        return user;
     }
 }
