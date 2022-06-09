@@ -1,18 +1,13 @@
 package Package1;
 
-public class AdminUser implements IAdminUser {//IAdminUser extends IUser
+public class AdminUser extends User implements IAdminUser{//IAdminUser extends IAdminUser
 
-
-    private boolean _validatedUser;
     private String _accountType;
-    private String _firstName;
-    private String _lastName;
 
-    public AdminUser(boolean validatedUser, String accountType, String firstName, String lastName){
-        this._validatedUser = validatedUser;
+
+    public AdminUser(boolean validatedUser, String accountType, String firstName, String lastName) {
+        super(validatedUser, firstName, lastName);
         this._accountType = accountType;
-        this._firstName = firstName;
-        this._lastName = lastName;
     }
 
     @Override
@@ -27,8 +22,8 @@ public class AdminUser implements IAdminUser {//IAdminUser extends IUser
 
     @Override
     public String getName(){
-
-        return _firstName+" "+_lastName;
+        //unikt beteende
+        return super.getName()+" ("+_accountType+")";
     }
 
 }

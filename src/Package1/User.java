@@ -1,28 +1,16 @@
 package Package1;
 
-public class User implements IAdminUser {//IAdminUser extends IUser
+public class User implements IUser {
 
 
     private boolean _validatedUser;
-    private String _accountType;
     private String _firstName;
     private String _lastName;
 
-    public User(boolean validatedUser, String accountType, String firstName, String lastName){
+    public User(boolean validatedUser, String firstName, String lastName){
         this._validatedUser = validatedUser;
-        this._accountType = accountType;
         this._firstName = firstName;
         this._lastName = lastName;
-    }
-
-    @Override
-    public boolean isUserAdmin(){
-        boolean isAdmin = false;
-
-        if(this._accountType.equalsIgnoreCase("admin") || this._accountType.equalsIgnoreCase("staff")){
-            isAdmin = true;
-        }
-        return isAdmin;
     }
 
     @Override

@@ -56,7 +56,7 @@ public class UserService {
         String lastName = database.getLastName(username);
 
 
-        user = new User(true, userAccountType, firstName, lastName);
+        user = new AdminUser(true, userAccountType, firstName, lastName);
 
         JFrame f = new JFrame();
         JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);
@@ -122,3 +122,9 @@ public class UserService {
         return user;
     }
 }
+
+
+//Vi har implementerat User och AdminUser med 2 olika metoder som är specificerade i 2 olika interface.
+//User implements IUser
+//AdminUser extends User and implements IAdminUser
+//Om någon vet om interfacet IUser så kan dom få olika beteenden om dom får AdminUser- eller User-objekt då AdminUser overridear getName()
