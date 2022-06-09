@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 //min kommentar
@@ -280,7 +281,11 @@ public class GUI {
 
             //här borde kommentaren dyka upp
             public void actionPerformed(ActionEvent event){
-                _userService.signInUser(usernameField.getText(), new String(passwordField.getPassword()));
+                try {
+                    _userService.signInUser(usernameField.getText(), new String(passwordField.getPassword()));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 //refresha knapparna
                 event = new ActionEvent(this, event.getID(), "start");
                 cHandler.actionPerformed(event);

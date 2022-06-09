@@ -21,7 +21,7 @@ public class LibrarySys {
         var userService = new UserService(database);
         gui = new GUI(searchService, userService);
         gui.createGUI(cHandler);
-        var user = new User(false, "guest");
+
 
         vm = new VisibilityManager(gui, userService);
         cHandler.setVisibilityManager(vm);

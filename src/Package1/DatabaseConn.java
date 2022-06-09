@@ -92,40 +92,6 @@ public class DatabaseConn {
         return searchResults;
     }
 
-//    public List<String> selectCopiesOfItem(String searchParameter) {
-//
-//        List<String> searchResults = new ArrayList<>();
-//
-//        try {
-//            Connection conn = getConnection();
-//            Statement stmt = conn.createStatement();
-//
-//            String strSelect = "SELECT * from copy WHERE ISBN = '"+searchParameter+"' OR WHERE MovieID = '"+searchParameter+"'";
-//
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            int rowCount = 0;
-//            String isbnCopies = null;
-//            String movieIdCopies = null;
-//
-//
-//
-//            while (rset.next()) {
-//
-//                isbnCopies = rset.getString("ISBN");
-//                movieIdCopies = rset.getString("MovieID");
-//
-//                searchResults.add(allInformation);
-//                ++rowCount;
-//            }
-//
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return searchResults;
-//    }
-
     public  List<String> selectBooks(String searchParameter) {
 
         List<String> searchResults = new ArrayList<>();
@@ -668,9 +634,7 @@ public class DatabaseConn {
         }
     }
 
-    public boolean getAccountType(String username) {
-
-        boolean isAdmin = false;
+    public String getAccountType(String username) throws SQLException {
 
         List<String> searchResults = new ArrayList<>();
 
@@ -689,17 +653,16 @@ public class DatabaseConn {
             while (rset.next()) {
 
                 String accountTypeFromDB = rset.getString("AccountType");
+                return accountTypeFromDB;
 
-                if(accountTypeFromDB.equalsIgnoreCase("admin")){
-                    isAdmin = true;
-                }
-                ++rowCount;
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            //säkerställa att null aldrig händer, för en användartyp ska alltid finnas för en användare
+            throw ex;
         }
 
-        return isAdmin;
+        return null;
     }
 }

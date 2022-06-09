@@ -2,7 +2,6 @@ package Package1;
 
 public class User {
 
-    //här har vi en basic användarklass
 
     private boolean _validatedUser;
     private String _accountType;
@@ -12,4 +11,24 @@ public class User {
         this._accountType = accountType;
     }
 
+    public boolean isUserAdmin(){
+
+        boolean isAdmin = false;
+        
+        if(this._accountType.equalsIgnoreCase("admin") || this._accountType.equalsIgnoreCase("staff")){
+            isAdmin = true;
+        }
+
+
+        return isAdmin;
+    }
+
 }
+
+//public class UserDetails extends User {
+//
+//    public UserDetails(boolean validatedUser, String accountType) {
+//        super(validatedUser, accountType);
+//    }
+//
+//}

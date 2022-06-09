@@ -1,6 +1,7 @@
 package Package1;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class UserService {
 
@@ -12,48 +13,50 @@ public class UserService {
     public UserService(DatabaseConn database){
         this.database = database;
     }
+    private User user;
 
     public boolean isAuthenticated(){
-        return isLoggedIn;
+
+        if(user != null){
+            return true;
+        }
+
+        return false;
     }
 
     public boolean isUserAdmin(){
-        return isAdminLoggedIn;
+
+        if(user == null){
+            return false;
+        }
+
+        return user.isUserAdmin();
     }
 
     public void signOutUser (){
-        isLoggedIn = false;
-        isAdminLoggedIn = false;
+        user = null;
     }
 
 
-    public void signInUser(String username, String password){
+    public void signInUser(String username, String password) throws SQLException {
 
         System.out.println("User service was requested to sign in username: '"+username+"' and user password: '"+password+"'");
 
         boolean result = database.validateUser(username, password);
-        boolean isAdmin = false;
 
-        if(result == true){
-            isAdmin = database.getAccountType(username);
+        if(result == false){
+            JFrame f2 = new JFrame();
+            JOptionPane.showMessageDialog(f2, "You could not be signed in, please try again");
+            return;
         }
 
-        //If result is false return false
-        //If result is true then get user details
-        //save user details in this class
-        isLoggedIn = result;
-        isAdminLoggedIn = isAdmin;
+        String userAccountType = database.getAccountType(username);
 
-        //isAdminLoggedIn = result;
-            //
-            if(result == true){
-                JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);
-            }
-            else{
-                JFrame f2 = new JFrame();
-                JOptionPane.showMessageDialog(f2, "You could not be signed in, please try again");
-            }
+        user = new User(true, userAccountType);
+
+        JFrame f = new JFrame();
+        JOptionPane.showMessageDialog(f, "You are signed in, Welcome "+username);
+
     }
 
 
