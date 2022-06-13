@@ -125,6 +125,6 @@ public class UserService {
 
 
 //Vi har implementerat User och AdminUser med 2 olika metoder som är specificerade i 2 olika interface.
-//User implements IUser
-//AdminUser extends User and implements IAdminUser
+//User implementerar IUser(interface)
+//AdminUser extendar User and implementerar IAdminUser(interface)
 //Om någon vet om interfacet IUser så kan dom få olika beteenden om dom får AdminUser- eller User-objekt då AdminUser overridear getName()
